@@ -18,5 +18,6 @@ jobs:
             - ~/.m2
           key: v1-dependencies-{{ checksum "pom.xml" }}
       - run: mvn test
+      - run: bash <(curl -s https://codecov.io/bash)
       - store_artifacts:
           path:  target
