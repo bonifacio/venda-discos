@@ -23,5 +23,5 @@ jobs:
       - store_artifacts:
           path:  target
       - codecov/upload:
-          file: site/jacoco
+          file: target/site/jacoco/jacoco.xml
           token: 7c55e49d-cd5c-42d7-aa0c-9df9365a94a8
