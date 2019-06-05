@@ -6,8 +6,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.beblue.vendadiscos.model.FiltroVenda;
 import br.com.beblue.vendadiscos.model.entity.Venda;
+import br.com.beblue.vendadiscos.model.filter.VendaFilter;
 import br.com.beblue.vendadiscos.service.VendaService;
 
 @RestController
@@ -22,7 +22,7 @@ public class VendaResource {
 	}
 
 	@GetMapping
-	public Page<Venda> pesquisar(FiltroVenda filtro) {
+	public Page<Venda> pesquisar(VendaFilter filtro) {
 		return vendaService.pesquisar(filtro);
 	}
 }

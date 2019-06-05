@@ -1,10 +1,10 @@
-package br.com.beblue.vendadiscos.model;
+package br.com.beblue.vendadiscos.model.filter;
 
 import java.time.LocalDateTime;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
-public class FiltroVenda extends Pagination {
+public class VendaFilter {
 
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDateTime dataInicio;

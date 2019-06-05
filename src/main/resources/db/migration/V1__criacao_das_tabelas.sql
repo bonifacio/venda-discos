@@ -11,6 +11,7 @@ create table DISCO (
 	ARTISTAS varchar(300),
 	NOME varchar(100) not null,
 	PRECO decimal(19,2) not null,
+	GENERO_ID bigint not null,
 	primary key (ID)
 );
 
@@ -41,3 +42,5 @@ alter table CASHBACK add constraint FK_CASHBACK_GENERO foreign key (GENERO_ID) r
 alter table ITEM add constraint FK_ITEM_DISCO foreign key (DISCO_ID) references DISCO;
 
 alter table ITEM add constraint FK_ITEM_VENDA foreign key (VENDA_ID) references VENDA;
+
+alter table DISCO add constraint FK_DISCO_GENERO foreign key (GENERO_ID) references GENERO;
