@@ -23,5 +23,4 @@ public class GeneroServiceImpl implements GeneroService {
 	public List<Genero> obterTodos() {
 		return generoRepository.findAll();
 	}
-
 }
