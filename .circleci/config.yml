@@ -16,6 +16,9 @@ jobs:
           key: v1-dependencies-{{ checksum "pom.xml" }}
       - run: mvn sonar:sonar -Dsonar.projectKey=bonifacio_venda-discos -Dsonar.organization=bonifacio-github -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=$SONAR
   test:
+    branches:
+      only:
+        - master
     docker:
       - image: circleci/openjdk:8-jdk
     steps:
