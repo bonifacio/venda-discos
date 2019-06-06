@@ -32,7 +32,7 @@ jobs:
           paths:
             - ~/.m2
           key: v1-dependencies-{{ checksum "pom.xml" }}
-      - run: mvn sonar:sonar -Dsonar.projectKey=bonifacio_venda-discos -Dsonar.organization=bonifacio-github -Dsonar.host.url=https://sonarcloud.io -Dsonar.java.binaries=target/ -Dsonar.login=$SONAR
+      - run: mvn sonar:sonar -Dsonar.projectKey=bonifacio_venda-discos -Dsonar.organization=bonifacio-github -Dsonar.host.url=https://sonarcloud.io -Dsonar.java.binaries=target/classes,target/test-classes -Dsonar.login=$SONAR
 workflows:
   version: 2
   build:
