@@ -1,9 +1,6 @@
 version: 2
 jobs:
   sonar:
-    branches:
-      only:
-        - develop
     docker:
       - image: circleci/openjdk:8-jdk
     steps:
