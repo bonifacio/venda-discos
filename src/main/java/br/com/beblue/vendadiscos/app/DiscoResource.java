@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.beblue.vendadiscos.domain.model.Disco;
+import br.com.beblue.vendadiscos.domain.model.dto.DiscoDTO;
 import br.com.beblue.vendadiscos.domain.model.filter.DiscoFilter;
 import br.com.beblue.vendadiscos.domain.service.DiscoServicePort;
 
@@ -25,7 +26,7 @@ public class DiscoResource {
 	}
 
 	@GetMapping
-	public Page<Disco> pesquisar(
+	public Page<DiscoDTO> pesquisar(
 			@RequestParam(defaultValue = "0") int numeroPagina,
 			@RequestParam(defaultValue = "10") int tamanhoPagina,
 			DiscoFilter discoFilter) {
@@ -34,9 +35,9 @@ public class DiscoResource {
 	}
 	
 	@GetMapping("/{id}")
-	public ResponseEntity<Disco> obterPorId(@PathVariable Long id) {
+	public ResponseEntity<DiscoDTO> obterPorId(@PathVariable Long id) {
 		
-		Disco disco = discoService.obterPorId(id);
+		DiscoDTO disco = discoService.obterPorId(id);
 		if (disco == null) {		
 			return ResponseEntity.notFound().build();
 		}

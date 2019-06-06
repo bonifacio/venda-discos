@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.beblue.vendadiscos.domain.model.Genero;
 import br.com.beblue.vendadiscos.domain.model.dto.GeneroDTO;
 import br.com.beblue.vendadiscos.domain.service.GeneroServicePort;
 
