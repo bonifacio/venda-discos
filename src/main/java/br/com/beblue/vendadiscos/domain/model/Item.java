@@ -1,22 +1,17 @@
-package br.com.beblue.vendadiscos.model.entity;
+package br.com.beblue.vendadiscos.domain.model;
 
 import java.math.BigDecimal;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
 
-@Entity
-public class Item {
+import br.com.beblue.vendadiscos.domain.model.base.EntityBase;
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
-	
+@Entity
+public class Item extends EntityBase {
+
 	@ManyToOne
 	@NotNull
 	private Venda venda;

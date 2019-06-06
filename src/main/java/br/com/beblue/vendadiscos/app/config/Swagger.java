@@ -1,4 +1,4 @@
-package br.com.beblue.vendadiscos.config;
+package br.com.beblue.vendadiscos.app.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -20,7 +20,7 @@ public class Swagger extends WebMvcConfigurationSupport {
 	public Docket docket() {
 		return new Docket(DocumentationType.SWAGGER_2)
 				.select()
-				.apis(RequestHandlerSelectors.basePackage("br.com.beblue.vendadiscos.resource"))
+				.apis(RequestHandlerSelectors.basePackage("br.com.beblue.vendadiscos.app"))
 				.build()
 				.apiInfo(apiInfo());
 	}
@@ -28,7 +28,7 @@ public class Swagger extends WebMvcConfigurationSupport {
 	private ApiInfo apiInfo() {
 		return new ApiInfoBuilder().title("API Venda Discos").version("1.0.0").build();
 	}
-	
+
 	@Override
 	protected void addResourceHandlers(ResourceHandlerRegistry registry) {
 		registry.addResourceHandler("swagger-ui.html").addResourceLocations("classpath:/META-INF/resources/");

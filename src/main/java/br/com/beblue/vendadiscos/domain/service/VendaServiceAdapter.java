@@ -1,21 +1,20 @@
-package br.com.beblue.vendadiscos.service.impl;
+package br.com.beblue.vendadiscos.domain.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
-import br.com.beblue.vendadiscos.model.entity.Venda;
-import br.com.beblue.vendadiscos.model.filter.VendaFilter;
-import br.com.beblue.vendadiscos.repository.VendaRepository;
-import br.com.beblue.vendadiscos.service.VendaService;
+import br.com.beblue.vendadiscos.domain.model.Venda;
+import br.com.beblue.vendadiscos.domain.model.filter.VendaFilter;
+import br.com.beblue.vendadiscos.infra.repository.VendaRepository;
 
 @Service
-public class VendaServiceImpl implements VendaService {
+public class VendaServiceAdapter implements VendaServicePort {
 	
 	private VendaRepository vendaRepository;
 	
 	@Autowired
-	public VendaServiceImpl(VendaRepository vendaRepository) {
+	public VendaServiceAdapter(VendaRepository vendaRepository) {
 		this.vendaRepository = vendaRepository;
 	}
 

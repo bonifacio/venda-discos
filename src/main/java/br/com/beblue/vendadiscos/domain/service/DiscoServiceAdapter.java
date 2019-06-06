@@ -1,4 +1,4 @@
-package br.com.beblue.vendadiscos.service.impl;
+package br.com.beblue.vendadiscos.domain.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -8,20 +8,19 @@ import org.springframework.stereotype.Service;
 
 import com.querydsl.core.BooleanBuilder;
 
-import br.com.beblue.vendadiscos.model.entity.Disco;
-import br.com.beblue.vendadiscos.model.entity.Disco_;
-import br.com.beblue.vendadiscos.model.entity.QDisco;
-import br.com.beblue.vendadiscos.model.filter.DiscoFilter;
-import br.com.beblue.vendadiscos.repository.DiscoRepository;
-import br.com.beblue.vendadiscos.service.DiscoService;
+import br.com.beblue.vendadiscos.domain.model.Disco;
+import br.com.beblue.vendadiscos.domain.model.Disco_;
+import br.com.beblue.vendadiscos.domain.model.QDisco;
+import br.com.beblue.vendadiscos.domain.model.filter.DiscoFilter;
+import br.com.beblue.vendadiscos.infra.repository.DiscoRepository;
 
 @Service
-public class DiscoServiceImpl implements DiscoService {
+public class DiscoServiceAdapter implements DiscoServicePort {
 
 	private DiscoRepository discoRepository;
 	
 	@Autowired
-	public DiscoServiceImpl(DiscoRepository discoRepository) {
+	public DiscoServiceAdapter(DiscoRepository discoRepository) {
 		
 		this.discoRepository = discoRepository;
 	}

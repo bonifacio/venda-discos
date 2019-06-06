@@ -1,0 +1,35 @@
+package br.com.beblue.vendadiscos.domain.service;
+
+import java.util.List;
+import java.util.stream.Collectors;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import br.com.beblue.vendadiscos.domain.model.Genero;
+import br.com.beblue.vendadiscos.domain.model.dto.GeneroDTO;
+import br.com.beblue.vendadiscos.domain.repository.GeneroRepositoryPort;
+
+@Service
+public class GeneroServiceAdapter implements GeneroServicePort {
+
+	private GeneroRepositoryPort generoRepository;
+	
+	@Autowired
+	public GeneroServiceAdapter(GeneroRepositoryPort generoRepository) {
+		this.generoRepository = generoRepository;
+	}
+
+	@Override
+	public List<GeneroDTO> obterTodos() {
+		List<Genero> generos = generoRepository.obterTodos();
+		return generosDTO(generos);
+	}
+
+	private List<GeneroDTO> generosDTO(final List<Genero> generos) {
+		return generos
+				.stream()
+				.map(genero -> new GeneroDTO(genero))
+				.collect(Collectors.toList());
+	}
+}

@@ -1,8 +1,4 @@
-package br.com.beblue.vendadiscos.resource;
-
-import java.util.Optional;
-
-import javax.validation.Valid;
+package br.com.beblue.vendadiscos.app;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -13,18 +9,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.beblue.vendadiscos.model.entity.Disco;
-import br.com.beblue.vendadiscos.model.filter.DiscoFilter;
-import br.com.beblue.vendadiscos.service.DiscoService;
+import br.com.beblue.vendadiscos.domain.model.Disco;
+import br.com.beblue.vendadiscos.domain.model.filter.DiscoFilter;
+import br.com.beblue.vendadiscos.domain.service.DiscoServicePort;
 
 @RestController
 @RequestMapping("/disco")
 public class DiscoResource {
 
-	private DiscoService discoService;
+	private DiscoServicePort discoService;
 	
 	@Autowired
-	public DiscoResource(DiscoService discoService) {
+	public DiscoResource(DiscoServicePort discoService) {
 		this.discoService = discoService;
 	}
 

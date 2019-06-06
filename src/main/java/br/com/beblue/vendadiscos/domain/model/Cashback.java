@@ -1,4 +1,4 @@
-package br.com.beblue.vendadiscos.model.entity;
+package br.com.beblue.vendadiscos.domain.model;
 
 import java.math.BigDecimal;
 import java.time.DayOfWeek;
@@ -6,17 +6,12 @@ import java.time.DayOfWeek;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
-@Entity
-public class Cashback {
+import br.com.beblue.vendadiscos.domain.model.base.EntityBase;
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+@Entity
+public class Cashback extends EntityBase {
 	
 	@ManyToOne
 	private Genero genero;

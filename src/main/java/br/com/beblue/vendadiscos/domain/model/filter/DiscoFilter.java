@@ -1,4 +1,4 @@
-package br.com.beblue.vendadiscos.model.filter;
+package br.com.beblue.vendadiscos.domain.model.filter;
 
 public class DiscoFilter {
 

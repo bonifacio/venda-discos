@@ -1,4 +1,4 @@
-package br.com.beblue.vendadiscos.resource;
+package br.com.beblue.vendadiscos.app;
 
 import java.util.List;
 
@@ -7,22 +7,23 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.beblue.vendadiscos.model.entity.Genero;
-import br.com.beblue.vendadiscos.service.GeneroService;
+import br.com.beblue.vendadiscos.domain.model.Genero;
+import br.com.beblue.vendadiscos.domain.model.dto.GeneroDTO;
+import br.com.beblue.vendadiscos.domain.service.GeneroServicePort;
 
 @RestController
 @RequestMapping("/genero")
 public class GeneroResource {
 
-	private GeneroService generoService;
+	private GeneroServicePort generoService;
 	
 	@Autowired
-	public GeneroResource(GeneroService generoService) {
+	public GeneroResource(GeneroServicePort generoService) {
 		this.generoService = generoService;
 	}
 
 	@GetMapping
-	public List<Genero> obterTodos() {
+	public List<GeneroDTO> obterTodos() {
 		return generoService.obterTodos();
 	}
 }

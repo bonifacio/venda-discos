@@ -1,23 +1,18 @@
-package br.com.beblue.vendadiscos.model.entity;
+package br.com.beblue.vendadiscos.domain.model;
 
 import java.math.BigDecimal;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-@Entity
-public class Disco {
+import br.com.beblue.vendadiscos.domain.model.base.EntityBase;
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
-	
+@Entity
+public class Disco extends EntityBase {
+
 	@Size(max = 100)
 	@NotBlank
 	private String nome;
@@ -30,14 +25,6 @@ public class Disco {
 	
 	@ManyToOne
 	private Genero genero;
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
 
 	public String getNome() {
 		return nome;
