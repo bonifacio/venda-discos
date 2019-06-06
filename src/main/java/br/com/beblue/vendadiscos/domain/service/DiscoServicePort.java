@@ -7,7 +7,7 @@ import br.com.beblue.vendadiscos.domain.model.filter.DiscoFilter;
 
 public interface DiscoServicePort {
 
-	Page<Disco> pesquisar(int page, int size, DiscoFilter discoFilter);
+	Page<Disco> pesquisar(DiscoFilter discoFilter, int numeroPagina, int tamanhoPagina);
 
 	Disco obterPorId(Long id);
 }

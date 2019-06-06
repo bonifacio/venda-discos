@@ -26,11 +26,11 @@ public class DiscoResource {
 
 	@GetMapping
 	public Page<Disco> pesquisar(
-			@RequestParam(defaultValue = "0") int page,
-			@RequestParam(defaultValue = "10") int size,
+			@RequestParam(defaultValue = "0") int numeroPagina,
+			@RequestParam(defaultValue = "10") int tamanhoPagina,
 			DiscoFilter discoFilter) {
 		
-		return discoService.pesquisar(page, size, discoFilter);
+		return discoService.pesquisar(discoFilter, numeroPagina, tamanhoPagina);
 	}
 	
 	@GetMapping("/{id}")
