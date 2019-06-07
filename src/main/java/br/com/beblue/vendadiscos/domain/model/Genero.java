@@ -27,7 +27,7 @@ public class Genero extends EntityBase {
 		Optional<Cashback> cashback = this.cashback.stream()
 			.filter(c -> c.getDia().equals(LocalDateTime.now().getDayOfWeek()))
 			.findFirst();
-		if (cashback.isEmpty()) {
+		if (!cashback.isPresent()) {
 			return BigDecimal.ZERO;
 		}
 		return cashback.get().getPercentual();
