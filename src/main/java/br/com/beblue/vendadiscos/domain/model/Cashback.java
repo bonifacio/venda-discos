@@ -20,4 +20,12 @@ public class Cashback extends EntityBase {
 	private DayOfWeek dia;
 	
 	private BigDecimal percentual;
+	
+	public DayOfWeek getDia() {
+		return dia;
+	}
+	
+	public BigDecimal getPercentual() {
+		return percentual;
+	}
 }

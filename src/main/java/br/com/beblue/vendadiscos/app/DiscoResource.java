@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.beblue.vendadiscos.domain.model.Disco;
 import br.com.beblue.vendadiscos.domain.model.dto.DiscoDTO;
 import br.com.beblue.vendadiscos.domain.model.filter.DiscoFilter;
 import br.com.beblue.vendadiscos.domain.service.DiscoServicePort;
@@ -29,9 +28,9 @@ public class DiscoResource {
 	public Page<DiscoDTO> pesquisar(
 			@RequestParam(defaultValue = "0") int numeroPagina,
 			@RequestParam(defaultValue = "10") int tamanhoPagina,
-			DiscoFilter discoFilter) {
+			DiscoFilter filtro) {
 		
-		return discoService.pesquisar(discoFilter, numeroPagina, tamanhoPagina);
+		return discoService.pesquisar(filtro, numeroPagina, tamanhoPagina);
 	}
 	
 	@GetMapping("/{id}")

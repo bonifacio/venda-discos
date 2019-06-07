@@ -28,4 +28,22 @@ public class Item extends EntityBase {
 	
 	@NotNull
 	private BigDecimal cashback;
+	
+	public Disco getDisco() {
+		return disco;
+	}
+	
+	public void setDisco(Disco disco) {
+		this.disco = disco;
+		this.valor = disco.getPreco();
+		this.cashback = disco.getCashback();
+	}
+	
+	public Integer getQuantidade() {
+		return quantidade;
+	}
+	
+	public void setQuantidade(Integer quantidade) {
+		this.quantidade = quantidade;
+	}
 }

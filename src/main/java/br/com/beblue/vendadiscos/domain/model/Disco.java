@@ -57,4 +57,9 @@ public class Disco extends EntityBase {
 	public void setGenero(Genero genero) {
 		this.genero = genero;
 	}
+
+	public BigDecimal getCashback() {
+		
+		return this.preco.multiply(this.genero.getPercentualCashback());
+	}
 }

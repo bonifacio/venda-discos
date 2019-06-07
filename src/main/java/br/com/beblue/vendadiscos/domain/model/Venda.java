@@ -1,6 +1,7 @@
 package br.com.beblue.vendadiscos.domain.model;
 
 import java.time.LocalDateTime;
+import java.util.Collections;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -19,4 +20,12 @@ public class Venda extends EntityBase {
 	
 	@OneToMany(mappedBy = "venda", fetch = FetchType.EAGER)
 	private List<Item> itens;
+	
+	public LocalDateTime getData() {
+		return data;
+	}
+	
+	public List<Item> getItens() {
+		return Collections.unmodifiableList(itens);
+	}
 }

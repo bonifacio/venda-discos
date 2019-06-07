@@ -10,7 +10,7 @@ public class DiscoConverter {
 
 	public static List<DiscoDTO> paraDTO(List<Disco> discos) {
 		
-		return discos.stream().map(d -> new DiscoDTO(d)).collect(Collectors.toList());
+		return discos.stream().map(DiscoDTO::new).collect(Collectors.toList());
 	}
 
 	public static DiscoDTO paraDTO(Disco disco) {

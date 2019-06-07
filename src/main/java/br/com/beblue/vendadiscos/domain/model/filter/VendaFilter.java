@@ -1,30 +1,31 @@
 package br.com.beblue.vendadiscos.domain.model.filter;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.annotation.DateTimeFormat.ISO;
 
 public class VendaFilter {
 
-	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	private LocalDateTime dataInicio;
+	@DateTimeFormat(iso = ISO.DATE)
+	private LocalDate dataInicio;
 	
-	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	private LocalDateTime dataFim;
+	@DateTimeFormat(iso = ISO.DATE)
+	private LocalDate dataFim;
 
-	public LocalDateTime getDataInicio() {
+	public LocalDate getDataInicio() {
 		return dataInicio;
 	}
 
-	public void setDataInicio(LocalDateTime dataInicio) {
+	public void setDataInicio(LocalDate dataInicio) {
 		this.dataInicio = dataInicio;
 	}
 
-	public LocalDateTime getDataFim() {
+	public LocalDate getDataFim() {
 		return dataFim;
 	}
 
-	public void setDataFim(LocalDateTime dataFim) {
+	public void setDataFim(LocalDate dataFim) {
 		this.dataFim = dataFim;
 	}
 }

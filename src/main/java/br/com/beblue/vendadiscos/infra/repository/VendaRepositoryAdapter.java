@@ -1,42 +1,39 @@
 package br.com.beblue.vendadiscos.infra.repository;
 
+import java.time.LocalTime;
 import java.util.Optional;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Direction;
-import org.springframework.data.util.Streamable;
 import org.springframework.stereotype.Repository;
 
 import com.querydsl.core.BooleanBuilder;
 import com.querydsl.core.types.Predicate;
 
-import br.com.beblue.vendadiscos.domain.model.Disco;
-import br.com.beblue.vendadiscos.domain.model.QDisco;
-import br.com.beblue.vendadiscos.domain.model.dto.VendaDTO;
-import br.com.beblue.vendadiscos.domain.model.filter.DiscoFilter;
+import br.com.beblue.vendadiscos.domain.model.QVenda;
+import br.com.beblue.vendadiscos.domain.model.Venda;
+import br.com.beblue.vendadiscos.domain.model.filter.VendaFilter;
 import br.com.beblue.vendadiscos.domain.model.filter.util.Ordenacao;
 import br.com.beblue.vendadiscos.domain.model.filter.util.Pagina;
-import br.com.beblue.vendadiscos.domain.repository.DiscoRepositoryPort;
+import br.com.beblue.vendadiscos.domain.repository.VendaRepositoryPort;
 
 @Repository
-public class DiscoRepositoryAdapter implements DiscoRepositoryPort {
-	
-	private DiscoRepository discoRepository;
+public class VendaRepositoryAdapter implements VendaRepositoryPort {
 
-	@Autowired
-	public DiscoRepositoryAdapter(DiscoRepository discoRepository) {
-		this.discoRepository = discoRepository;
+	private VendaRepository vendaRepository;
+
+	public VendaRepositoryAdapter(VendaRepository vendaRepository) {
+		this.vendaRepository = vendaRepository;
 	}
-
+	
 	@Override
-	public Page<Disco> pesquisar(DiscoFilter filtro, Pagina pagina, Ordenacao ordenacao) {
+	public Page<Venda> pesquisar(VendaFilter filtro, Pagina pagina, Ordenacao ordenacao) {
 		
 		Predicate booleanBuilder = obterPredicatePesquisar(filtro);
 		PageRequest pageRequest = obterPageRequestPesquisar(pagina, ordenacao);
-		return discoRepository.findAll(booleanBuilder, pageRequest);
+		return vendaRepository.findAll(booleanBuilder, pageRequest);
 	}
 
 	private PageRequest obterPageRequestPesquisar(Pagina pagina, Ordenacao ordenacao) {
@@ -46,18 +43,22 @@ public class DiscoRepositoryAdapter implements DiscoRepositoryPort {
 		return PageRequest.of(pagina.getNumero(), pagina.getTamanho(), sort);
 	}
 
-	private Predicate obterPredicatePesquisar(DiscoFilter filtro) {
+	private Predicate obterPredicatePesquisar(VendaFilter filtro) {
 		
 		BooleanBuilder booleanBuilder = new BooleanBuilder();
-		if (filtro.getIdGenero() != null) {
-			booleanBuilder.and(QDisco.disco.genero.id.eq(filtro.getIdGenero()));
+		if (filtro.getDataInicio() != null) {
+			booleanBuilder.and(QVenda.venda.data.goe(filtro.getDataInicio().atTime(LocalTime.MIN)));
+		}
+		if (filtro.getDataFim() != null) {
+			booleanBuilder.and(QVenda.venda.data.loe(filtro.getDataFim().atTime(LocalTime.MAX)));
 		}
 		return booleanBuilder;
 	}
 
 	@Override
-	public Optional<Disco> obterPorId(Long id) {
+	public Optional<Venda> obterPorId(Long id) {
 		
-		return discoRepository.findById(id);
+		return vendaRepository.findById(id);
 	}
+
 }
