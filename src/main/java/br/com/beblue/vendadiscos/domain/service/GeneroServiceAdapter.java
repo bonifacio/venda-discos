@@ -25,4 +25,8 @@ public class GeneroServiceAdapter implements GeneroServicePort {
 		List<Genero> generos = generoRepository.obterTodos();
 		return GeneroConverter.paraDTO(generos);
 	}
+	
+	public List<Genero> findAll() {
+		return generoRepository.obterTodos();
+	}
 }

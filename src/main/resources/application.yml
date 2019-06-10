@@ -20,3 +20,6 @@ spring:
   jackson:
     deserialization:
       fail-on-unknown-properties: true
+spotify:
+  client_id: ${ENV_SPOTIFY_CLIENT_ID}
+  client_secret: ${ENV_SPOTIFY_CLIENT_SECRET}

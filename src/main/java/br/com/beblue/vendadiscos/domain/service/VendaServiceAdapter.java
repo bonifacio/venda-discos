@@ -1,5 +1,6 @@
 package br.com.beblue.vendadiscos.domain.service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -61,13 +62,18 @@ public class VendaServiceAdapter implements VendaServicePort {
 	@Transactional
 	public VendaDTO registrarVenda(final List<ItemDTO> itensDTO) {
 		
+		Venda venda = new Venda();
 		List<Item> itens = itensDTO.stream().map(itemDTO -> {
 			Item item = new Item();
 			item.setQuantidade(itemDTO.getQuantidade());
 			item.setDisco(discoRepository.obterPorId(itemDTO.getIdDisco()).get());
+			item.setVenda(venda);
 			return item;
 		})
 		.collect(Collectors.toList());
-		return null;
+		venda.setItens(itens);
+		venda.setData(LocalDateTime.now());
+		vendaRepository.registrarVenda(venda);
+		return new VendaDTO(venda);
 	}
 }

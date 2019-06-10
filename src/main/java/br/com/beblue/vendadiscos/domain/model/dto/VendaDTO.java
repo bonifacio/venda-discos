@@ -6,7 +6,9 @@ import java.util.List;
 
 import br.com.beblue.vendadiscos.domain.model.Venda;
 import br.com.beblue.vendadiscos.domain.model.dto.converter.ItemConverter;
+import io.swagger.annotations.ApiModel;
 
+@ApiModel("Venda")
 public class VendaDTO {
 
 	private Long id;

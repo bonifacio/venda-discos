@@ -1,7 +1,9 @@
 package br.com.beblue.vendadiscos.domain.model.dto;
 
 import br.com.beblue.vendadiscos.domain.model.Item;
+import io.swagger.annotations.ApiModel;
 
+@ApiModel("Item")
 public class ItemDTO {
 	
 	private Long idDisco;
