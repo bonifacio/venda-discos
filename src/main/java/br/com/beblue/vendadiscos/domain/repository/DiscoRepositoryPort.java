@@ -14,6 +14,4 @@ public interface DiscoRepositoryPort {
 	Page<Disco> pesquisar(DiscoFilter discoFilter, Pagina pagina, Ordenacao ordenacao);
 
 	Optional<Disco> obterPorId(Long id);
-
-	void save(Disco disco);
 }

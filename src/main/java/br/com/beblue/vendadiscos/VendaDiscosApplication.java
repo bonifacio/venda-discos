@@ -15,13 +15,13 @@ public class VendaDiscosApplication {
 		SpringApplication.run(VendaDiscosApplication.class, args);
 	}
 
-	@Bean("threadPoolTaskExecutor")
+	@Bean
 	public TaskExecutor taskExecutor() {
 		ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
-        executor.setCorePoolSize(20);
-        executor.setMaxPoolSize(1000);
-        executor.setWaitForTasksToCompleteOnShutdown(true);
-        executor.setThreadNamePrefix("Async-");
+        executor.setCorePoolSize(4);
+        executor.setMaxPoolSize(4);
+        executor.setQueueCapacity(100);
+        executor.initialize();
         return executor;
 	}
 }

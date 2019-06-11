@@ -1,4 +1,4 @@
-package br.com.beblue.vendadiscos.domain.service;
+package br.com.beblue.vendadiscos.infra.api.spotify;
 
 import java.util.List;
 

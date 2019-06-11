@@ -1,9 +1,10 @@
 package br.com.beblue.vendadiscos.domain.model;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
+import javax.persistence.ManyToMany;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -13,19 +14,18 @@ import br.com.beblue.vendadiscos.domain.model.base.EntityBase;
 @Entity
 public class Disco extends EntityBase {
 
-	@Size(max = 100)
+	private String idSpotify;
+	
+	@Size(max = 150)
 	@NotBlank
 	private String nome;
-	
-	@Size(max = 300)
-	private String artistas;
 	
 	@NotNull
 	private BigDecimal preco;
 	
-	@ManyToOne
-	private Genero genero;
-
+	@ManyToMany
+	private List<Artista> artistas;
+	
 	public String getNome() {
 		return nome;
 	}
@@ -34,13 +34,7 @@ public class Disco extends EntityBase {
 		this.nome = nome;
 	}
 
-	public String getArtistas() {
-		return artistas;
-	}
-
-	public void setArtistas(String artistas) {
-		this.artistas = artistas;
-	}
+	
 
 	public BigDecimal getPreco() {
 		return preco;
@@ -50,16 +44,8 @@ public class Disco extends EntityBase {
 		this.preco = preco;
 	}
 
-	public Genero getGenero() {
-		return genero;
-	}
-
-	public void setGenero(Genero genero) {
-		this.genero = genero;
-	}
-
-	public BigDecimal getCashback() {
-		
-		return this.preco.multiply(this.genero.getPercentualCashback());
-	}
+//	public BigDecimal getCashback() {
+//		
+//		return this.preco.multiply(this.genero.getPercentualCashback());
+//	}
 }

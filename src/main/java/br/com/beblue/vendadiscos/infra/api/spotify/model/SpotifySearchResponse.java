@@ -1,4 +1,6 @@
-package br.com.beblue.vendadiscos.domain.service;
+package br.com.beblue.vendadiscos.infra.api.spotify.model;
+
+import br.com.beblue.vendadiscos.infra.api.spotify.Artists;
 
 public class SpotifySearchResponse {
 

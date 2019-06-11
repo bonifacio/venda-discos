@@ -3,12 +3,12 @@ spring:
     url: jdbc:h2:mem:venda-discos
     #url: jdbc:h2:file:/data/venda-discos
     driverClassName: org.h2.Driver
-    username: ${ENV_DB_USER}
-    password: ${ENV_DB_PASSWORD}
+    username: ${ENV_DB_USER:#{servico}}
+    password: ${ENV_DB_PASSWORD:#{123456}}
   jpa:
     database-platform: org.hibernate.dialect.H2Dialect
     hibernate:
-      ddl-auto: validate
+      ddl-auto: update
     show-sql: true
     properties:
       hibernate:
@@ -23,3 +23,4 @@ spring:
 spotify:
   client_id: ${ENV_SPOTIFY_CLIENT_ID}
   client_secret: ${ENV_SPOTIFY_CLIENT_SECRET}
+  discos_por_genero: ${ENV_SPOTIFY_DISCOS_POR_GENERO:#{50}}

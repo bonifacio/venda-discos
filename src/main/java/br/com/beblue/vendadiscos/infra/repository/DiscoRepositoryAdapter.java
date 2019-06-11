@@ -60,9 +60,4 @@ public class DiscoRepositoryAdapter implements DiscoRepositoryPort {
 		
 		return discoRepository.findById(id);
 	}
-
-	@Override
-	public void save(Disco disco) {
-		discoRepository.save(disco);
-	}
 }

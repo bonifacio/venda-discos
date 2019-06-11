@@ -48,8 +48,4 @@ public class DiscoServiceAdapter implements DiscoServicePort {
 		}
 		return DiscoConverter.paraDTO(disco.get());
 	}
-
-	public void save(Disco disco) {
-		discoRepository.save(disco);
-	}
 }
