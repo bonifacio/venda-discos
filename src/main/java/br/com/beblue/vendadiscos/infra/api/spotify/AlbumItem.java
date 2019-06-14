@@ -10,6 +10,8 @@ public class AlbumItem {
 	
 	private List<ArtistsItem> artists;
 
+	private String id;
+
 	public String getName() {
 		return name;
 	}
@@ -24,5 +26,13 @@ public class AlbumItem {
 
 	public void setArtists(List<ArtistsItem> artists) {
 		this.artists = artists;
+	}
+
+	public String getId() {
+		return id;
+	}
+	
+	public void setId(String id) {
+		this.id = id;
 	}
 }

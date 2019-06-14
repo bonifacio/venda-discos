@@ -7,7 +7,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Direction;
-import org.springframework.data.util.Streamable;
 import org.springframework.stereotype.Repository;
 
 import com.querydsl.core.BooleanBuilder;
@@ -15,7 +14,6 @@ import com.querydsl.core.types.Predicate;
 
 import br.com.beblue.vendadiscos.domain.model.Disco;
 import br.com.beblue.vendadiscos.domain.model.QDisco;
-import br.com.beblue.vendadiscos.domain.model.dto.VendaDTO;
 import br.com.beblue.vendadiscos.domain.model.filter.DiscoFilter;
 import br.com.beblue.vendadiscos.domain.model.filter.util.Ordenacao;
 import br.com.beblue.vendadiscos.domain.model.filter.util.Pagina;
@@ -50,7 +48,7 @@ public class DiscoRepositoryAdapter implements DiscoRepositoryPort {
 		
 		BooleanBuilder booleanBuilder = new BooleanBuilder();
 		if (filtro.getIdGenero() != null) {
-			booleanBuilder.and(QDisco.disco.genero.id.eq(filtro.getIdGenero()));
+			booleanBuilder.and(QDisco.disco.artistas.any().generos.any().id.eq(filtro.getIdGenero()));
 		}
 		return booleanBuilder;
 	}
@@ -59,5 +57,17 @@ public class DiscoRepositoryAdapter implements DiscoRepositoryPort {
 	public Optional<Disco> obterPorId(Long id) {
 		
 		return discoRepository.findById(id);
+	}
+
+	@Override
+	public Disco obterPorIdSpotify(String idSpotify) {
+		
+		return discoRepository.findOneByIdSpotify(idSpotify).orElse(null);
+	}
+
+	@Override
+	public Disco salvar(Disco disco) {
+		
+		return discoRepository.save(disco);
 	}
 }

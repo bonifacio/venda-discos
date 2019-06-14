@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Optional;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 
 import br.com.beblue.vendadiscos.domain.model.base.EntityBase;
@@ -15,7 +16,7 @@ public class Genero extends EntityBase {
 
 	private String nome;
 	
-	@OneToMany(mappedBy = "genero")
+	@OneToMany(mappedBy = "genero", fetch = FetchType.EAGER)
 	private	List<Cashback> cashback;
 
 	public String getNome() {

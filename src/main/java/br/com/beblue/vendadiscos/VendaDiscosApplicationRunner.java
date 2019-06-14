@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 
 import br.com.beblue.vendadiscos.domain.service.SpotifyServicePort;
 
-//@Component
+@Component
 public class VendaDiscosApplicationRunner implements CommandLineRunner {
 	
 	private SpotifyServicePort spotifyService;
@@ -21,5 +21,4 @@ public class VendaDiscosApplicationRunner implements CommandLineRunner {
 	public void run(String... args) throws Exception {
 		spotifyService.importarDiscos();
 	}
-
 }

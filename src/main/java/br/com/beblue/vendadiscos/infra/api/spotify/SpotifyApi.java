@@ -1,9 +1,6 @@
 package br.com.beblue.vendadiscos.infra.api.spotify;
 
-import java.math.BigDecimal;
 import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 import javax.annotation.PostConstruct;
@@ -21,8 +18,6 @@ import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import br.com.beblue.vendadiscos.domain.model.Disco;
-import br.com.beblue.vendadiscos.domain.model.Genero;
 import br.com.beblue.vendadiscos.infra.api.spotify.model.ArtistsItem;
 import br.com.beblue.vendadiscos.infra.api.spotify.model.SpotifySearchResponse;
 
@@ -61,45 +56,12 @@ public class SpotifyApi {
 		return responseEntity.getBody();
 	}
 
-	public List<Disco> obterDiscosPorGenero(Genero genero, int offset, int limit) {
-
-		List<String> ids = obterIdsArtistas(genero.getNome(), offset, limit);
-		return ids.parallelStream().map(id -> {
-			HttpEntity<String> request = new HttpEntity<>(obterHttpHeaders());
-			String uriArtistsAlbums = uriArtistsAlbums(id);
-			ResponseEntity<SpotifyAlbumsResponse> responseEntity = new RestTemplate().exchange(uriArtistsAlbums, HttpMethod.GET, request, SpotifyAlbumsResponse.class);
-			return criarObjetoDisco(id, responseEntity, genero);
-		}).collect(Collectors.toList());
-	}
-
-	private Disco criarObjetoDisco(String id, ResponseEntity<SpotifyAlbumsResponse> responseEntity, Genero genero) {
-
-		Optional<AlbumItem> item = responseEntity.getBody().getItems().stream().findFirst();
-		AlbumItem albumItem = item.get();
-		Disco disco = new Disco();
-		disco.setArtistas(albumItem.getArtists().stream().map(ArtistsItem::getName).collect(Collectors.joining(", ")));
-		disco.setNome(albumItem.getName());
-		disco.setGenero(genero);
-		disco.setPreco(new BigDecimal(Math.random() * 100));
-		return disco;
-	}
-
-	private String uriArtistsAlbums(String id) {
+	private String uriArtistsAlbums(String id, int indiceDoDisco) {
 
 		UriComponentsBuilder uriComponentsBuilder = UriComponentsBuilder.fromUriString(String.format("https://api.spotify.com/v1/artists/%s/albums", id))
-				.queryParam("offset", "0")
-				.queryParam("limit", "1");
+				.queryParam("offset", String.valueOf(indiceDoDisco))
+				.queryParam("limit", String.valueOf(indiceDoDisco + 1));
 		return uriComponentsBuilder.toUriString();
-	}
-
-	private List<String> obterIdsArtistas(String nomeGenero, int offset, int limit) {
-
-		HttpEntity<String> request = new HttpEntity<>(obterHttpHeaders());
-		String uriSearchArtist = uriSearchArtist(nomeGenero, offset, limit);
-		ResponseEntity<SpotifySearchResponse> responseEntity = 
-				new RestTemplate().exchange(uriSearchArtist, HttpMethod.GET, request, SpotifySearchResponse.class);
-
-		return responseEntity.getBody().getArtists().getItems().stream().map(ArtistsItem::getId).collect(Collectors.toList());
 	}
 
 	private HttpHeaders obterHttpHeaders() {
@@ -124,4 +86,21 @@ public class SpotifyApi {
 		return Base64.encodeBase64String(credenciais.getBytes());
 	}
 
+	public List<ArtistsItem> obterArtistas(String genero, int offset, int limit) {
+		
+		HttpEntity<String> request = new HttpEntity<>(obterHttpHeaders());
+		String uriSearchArtist = uriSearchArtist(genero, offset, limit);
+		ResponseEntity<SpotifySearchResponse> responseEntity = 
+				new RestTemplate().exchange(uriSearchArtist, HttpMethod.GET, request, SpotifySearchResponse.class);
+
+		return responseEntity.getBody().getArtists().getItems().stream().collect(Collectors.toList());
+	}
+
+	public AlbumItem obterDisco(String idArtista, int indiceDoDisco) {
+		
+		HttpEntity<String> request = new HttpEntity<>(obterHttpHeaders());
+		String uriArtistsAlbums = uriArtistsAlbums(idArtista, indiceDoDisco);
+		ResponseEntity<SpotifyAlbumsResponse> responseEntity = new RestTemplate().exchange(uriArtistsAlbums, HttpMethod.GET, request, SpotifyAlbumsResponse.class);
+		return responseEntity.getBody().getItems().get(0);
+	}
 }
