@@ -28,7 +28,7 @@ public class SpotifyApi {
 	private String clientId;
 
 	@Value("${spotify.client_secret}")
-	private Object clientSecret;
+	private String clientSecret;
 
 	private SpotifyToken token;
 
