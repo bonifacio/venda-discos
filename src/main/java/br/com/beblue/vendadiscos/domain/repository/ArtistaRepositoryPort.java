@@ -7,4 +7,6 @@ public interface ArtistaRepositoryPort {
 	Artista obterPorIdSpotify(String idSpotify);
 
 	Artista salvar(Artista artista);
+
+	void remover(Artista artista);
 }

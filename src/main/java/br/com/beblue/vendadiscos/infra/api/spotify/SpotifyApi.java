@@ -18,8 +18,10 @@ import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import br.com.beblue.vendadiscos.infra.api.spotify.model.ArtistsItem;
-import br.com.beblue.vendadiscos.infra.api.spotify.model.SpotifySearchResponse;
+import br.com.beblue.vendadiscos.infra.api.spotify.model.DiscoSpotify;
+import br.com.beblue.vendadiscos.infra.api.spotify.model.ArtistaSpotify;
+import br.com.beblue.vendadiscos.infra.api.spotify.model.DiscoResponseSpotify;
+import br.com.beblue.vendadiscos.infra.api.spotify.model.ArtistaSpotifyResponse;
 
 @Service
 public class SpotifyApi {
@@ -81,26 +83,25 @@ public class SpotifyApi {
 	}
 
 	private String obterCredenciais() {
-
 		String credenciais = String.format("%s:%s", this.clientId, this.clientSecret);
 		return Base64.encodeBase64String(credenciais.getBytes());
 	}
 
-	public List<ArtistsItem> obterArtistas(String genero, int offset, int limit) {
-		
+	public List<ArtistaSpotify> obterArtistas(String genero, int offset, int limit) {
+
 		HttpEntity<String> request = new HttpEntity<>(obterHttpHeaders());
 		String uriSearchArtist = uriSearchArtist(genero, offset, limit);
-		ResponseEntity<SpotifySearchResponse> responseEntity = 
-				new RestTemplate().exchange(uriSearchArtist, HttpMethod.GET, request, SpotifySearchResponse.class);
+		ResponseEntity<ArtistaSpotifyResponse> responseEntity = 
+				new RestTemplate().exchange(uriSearchArtist, HttpMethod.GET, request, ArtistaSpotifyResponse.class);
 
 		return responseEntity.getBody().getArtists().getItems().stream().collect(Collectors.toList());
 	}
 
-	public AlbumItem obterDisco(String idArtista, int indiceDoDisco) {
-		
+	public DiscoSpotify obterDisco(String idArtista, int indiceDoDisco) {
+
 		HttpEntity<String> request = new HttpEntity<>(obterHttpHeaders());
 		String uriArtistsAlbums = uriArtistsAlbums(idArtista, indiceDoDisco);
-		ResponseEntity<SpotifyAlbumsResponse> responseEntity = new RestTemplate().exchange(uriArtistsAlbums, HttpMethod.GET, request, SpotifyAlbumsResponse.class);
+		ResponseEntity<DiscoResponseSpotify> responseEntity = new RestTemplate().exchange(uriArtistsAlbums, HttpMethod.GET, request, DiscoResponseSpotify.class);
 		return responseEntity.getBody().getItems().get(0);
 	}
 }

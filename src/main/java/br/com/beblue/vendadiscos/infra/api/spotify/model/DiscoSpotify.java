@@ -1,14 +1,12 @@
-package br.com.beblue.vendadiscos.infra.api.spotify;
+package br.com.beblue.vendadiscos.infra.api.spotify.model;
 
 import java.util.List;
 
-import br.com.beblue.vendadiscos.infra.api.spotify.model.ArtistsItem;
-
-public class AlbumItem {
+public class DiscoSpotify {
 
 	private String name;
-	
-	private List<ArtistsItem> artists;
+
+	private List<ArtistaSpotify> artists;
 
 	private String id;
 
@@ -20,18 +18,18 @@ public class AlbumItem {
 		this.name = name;
 	}
 
-	public List<ArtistsItem> getArtists() {
+	public List<ArtistaSpotify> getArtists() {
 		return artists;
 	}
 
-	public void setArtists(List<ArtistsItem> artists) {
+	public void setArtists(List<ArtistaSpotify> artists) {
 		this.artists = artists;
 	}
 
 	public String getId() {
 		return id;
 	}
-	
+
 	public void setId(String id) {
 		this.id = id;
 	}

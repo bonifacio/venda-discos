@@ -10,9 +10,9 @@ spring:
     hibernate:
       ddl-auto: validate
     show-sql: true
-    properties:
-      hibernate:
-        format_sql: true
+#    properties:
+#      hibernate:
+#        format_sql: true
   h2:
     console:
       enabled: true
@@ -20,7 +20,10 @@ spring:
   jackson:
     deserialization:
       fail-on-unknown-properties: true
+
+importacao-discos:
+  discos_por_genero: ${ENV_DISCOS_POR_GENERO:#{50}}
+  discos_por_vez: ${ENV_DISCOS_POR_VEZ:#{10}}
 spotify:
   client_id: ${ENV_SPOTIFY_CLIENT_ID}
   client_secret: ${ENV_SPOTIFY_CLIENT_SECRET}
-  discos_por_genero: ${ENV_SPOTIFY_DISCOS_POR_GENERO:#{50}}
