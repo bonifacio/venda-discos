@@ -23,8 +23,8 @@ import br.com.beblue.vendadiscos.domain.repository.ArtistaRepositoryPort;
 import br.com.beblue.vendadiscos.domain.repository.DiscoRepositoryPort;
 import br.com.beblue.vendadiscos.domain.repository.GeneroRepositoryPort;
 import br.com.beblue.vendadiscos.domain.repository.ImportacaoDiscosRepositoryPort;
-import br.com.beblue.vendadiscos.infra.api.spotify.model.DiscoSpotify;
 import br.com.beblue.vendadiscos.infra.api.spotify.model.ArtistaSpotify;
+import br.com.beblue.vendadiscos.infra.api.spotify.model.DiscoSpotify;
 
 @Service
 public class ImportacaoDiscosServiceAdapter implements ImportacaoDiscosServicePort {

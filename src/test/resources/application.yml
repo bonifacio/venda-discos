@@ -1,0 +1,18 @@
+spring:
+  datasource:
+    url: jdbc:h2:mem:venda-discos-test
+    driverClassName: org.h2.Driver
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    hibernate:
+      ddl-auto: validate
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+importacao-discos:
+  discos_por_genero: 50
+  discos_por_vez: 10
+spotify:
+  client_id: b8ca0328ccb84b64b87e898af173aeb9
+  client_secret: cd460df6206a49c6aa4395b327bc697e

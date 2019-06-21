@@ -25,5 +25,5 @@ importacao-discos:
   discos_por_genero: ${ENV_DISCOS_POR_GENERO:#{50}}
   discos_por_vez: ${ENV_DISCOS_POR_VEZ:#{10}}
 spotify:
-  client_id: ${ENV_SPOTIFY_CLIENT_ID}
-  client_secret: ${ENV_SPOTIFY_CLIENT_SECRET}
+  client_id: ${ENV_SPOTIFY_CLIENT_ID:#{b8ca0328ccb84b64b87e898af173aeb9}}
+  client_secret: ${ENV_SPOTIFY_CLIENT_SECRET:#{cd460df6206a49c6aa4395b327bc697e}}

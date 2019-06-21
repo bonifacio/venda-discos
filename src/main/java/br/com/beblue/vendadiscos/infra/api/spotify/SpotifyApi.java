@@ -18,10 +18,10 @@ import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import br.com.beblue.vendadiscos.infra.api.spotify.model.DiscoSpotify;
 import br.com.beblue.vendadiscos.infra.api.spotify.model.ArtistaSpotify;
-import br.com.beblue.vendadiscos.infra.api.spotify.model.DiscoResponseSpotify;
 import br.com.beblue.vendadiscos.infra.api.spotify.model.ArtistaSpotifyResponse;
+import br.com.beblue.vendadiscos.infra.api.spotify.model.DiscoResponseSpotify;
+import br.com.beblue.vendadiscos.infra.api.spotify.model.DiscoSpotify;
 
 @Service
 public class SpotifyApi {

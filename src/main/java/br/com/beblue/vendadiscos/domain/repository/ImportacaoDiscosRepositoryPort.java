@@ -3,8 +3,8 @@ package br.com.beblue.vendadiscos.domain.repository;
 import java.util.List;
 import java.util.Optional;
 
-import br.com.beblue.vendadiscos.infra.api.spotify.model.DiscoSpotify;
 import br.com.beblue.vendadiscos.infra.api.spotify.model.ArtistaSpotify;
+import br.com.beblue.vendadiscos.infra.api.spotify.model.DiscoSpotify;
 
 public interface ImportacaoDiscosRepositoryPort {
 

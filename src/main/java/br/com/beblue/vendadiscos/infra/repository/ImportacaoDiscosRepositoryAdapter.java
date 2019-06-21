@@ -11,8 +11,8 @@ import org.springframework.stereotype.Repository;
 
 import br.com.beblue.vendadiscos.domain.repository.ImportacaoDiscosRepositoryPort;
 import br.com.beblue.vendadiscos.infra.api.spotify.SpotifyApi;
-import br.com.beblue.vendadiscos.infra.api.spotify.model.DiscoSpotify;
 import br.com.beblue.vendadiscos.infra.api.spotify.model.ArtistaSpotify;
+import br.com.beblue.vendadiscos.infra.api.spotify.model.DiscoSpotify;
 
 @Repository
 public class ImportacaoDiscosRepositoryAdapter implements ImportacaoDiscosRepositoryPort {
