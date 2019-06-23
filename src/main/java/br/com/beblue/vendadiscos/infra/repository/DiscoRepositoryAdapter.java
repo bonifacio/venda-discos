@@ -49,6 +49,9 @@ public class DiscoRepositoryAdapter implements DiscoRepositoryPort {
 	private Predicate obterPredicatePesquisar(DiscoFilter filtro) {
 
 		BooleanBuilder booleanBuilder = new BooleanBuilder();
+		if (filtro == null) {
+			return booleanBuilder;
+		}
 		if (filtro.getIdGenero() != null) {
 			booleanBuilder.and(QDisco.disco.artistas.any().generos.any().id.eq(filtro.getIdGenero()));
 		}

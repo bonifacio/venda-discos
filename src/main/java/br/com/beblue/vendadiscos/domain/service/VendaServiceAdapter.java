@@ -10,7 +10,9 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.CollectionUtils;
 
+import br.com.beblue.vendadiscos.domain.exception.BusinessException;
 import br.com.beblue.vendadiscos.domain.model.Item;
 import br.com.beblue.vendadiscos.domain.model.Venda;
 import br.com.beblue.vendadiscos.domain.model.Venda_;
@@ -31,7 +33,10 @@ public class VendaServiceAdapter implements VendaServicePort {
 	private DiscoRepositoryPort discoRepository;
 	
 	@Autowired
-	public VendaServiceAdapter(VendaRepositoryPort vendaRepository, DiscoRepositoryPort discoRepository) {
+	public VendaServiceAdapter(
+			VendaRepositoryPort vendaRepository,
+			DiscoRepositoryPort discoRepository) {
+		
 		this.vendaRepository = vendaRepository;
 		this.discoRepository = discoRepository;
 	}
@@ -40,12 +45,12 @@ public class VendaServiceAdapter implements VendaServicePort {
 	public Page<VendaDTO> pesquisar(VendaFilter filtro, int numeroPagina, int tamanhoPagina) {
 		
 		Pagina pagina = new Pagina(numeroPagina, tamanhoPagina);
-		Ordenacao ordenacao = new Ordenacao(Venda_.data.getName(), Ordenacao.Direcao.DESC);
-		Page<Venda> discosPaginados = vendaRepository.pesquisar(filtro, pagina, ordenacao);
+		Ordenacao ordenacao = new Ordenacao(Venda_.DATA, Ordenacao.Direcao.DESC);
+		Page<Venda> vendasPaginadas = vendaRepository.pesquisar(filtro, pagina, ordenacao);
 		return new PageImpl<VendaDTO>(
-				VendaConverter.paraDTO(discosPaginados.getContent()),
-				discosPaginados.getPageable(),
-				discosPaginados.getTotalElements());
+				VendaConverter.paraDTO(vendasPaginadas.getContent()),
+				vendasPaginadas.getPageable(),
+				vendasPaginadas.getTotalElements());
 	}
 
 	@Override
@@ -62,6 +67,9 @@ public class VendaServiceAdapter implements VendaServicePort {
 	@Transactional
 	public VendaDTO registrarVenda(final List<ItemDTO> itensDTO) {
 		
+		if (CollectionUtils.isEmpty(itensDTO)) {
+			throw new BusinessException("Para realizar uma compra é necessário escolher pelo menos um item.");
+		}
 		Venda venda = new Venda();
 		List<Item> itens = itensDTO.stream().map(itemDTO -> {
 			Item item = new Item();
