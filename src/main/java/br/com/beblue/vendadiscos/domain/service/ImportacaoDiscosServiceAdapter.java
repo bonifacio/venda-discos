@@ -1,6 +1,7 @@
 package br.com.beblue.vendadiscos.domain.service;
 
 import java.math.BigDecimal;
+import java.security.SecureRandom;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -126,7 +127,7 @@ public class ImportacaoDiscosServiceAdapter implements ImportacaoDiscosServicePo
 		} else {
 			disco.setIdSpotify(discoImportado.getId());
 			disco.setNome(discoImportado.getName());
-			disco.setPreco(BigDecimal.valueOf(Math.random() * 100));
+			disco.setPreco(BigDecimal.valueOf(new SecureRandom().nextInt(100)));
 		}
 		disco.adicionarArtista(artista);
 		return discoRepository.salvar(disco);
