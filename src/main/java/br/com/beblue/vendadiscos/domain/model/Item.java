@@ -54,4 +54,12 @@ public class Item extends EntityBase {
 	public void setVenda(Venda venda) {
 		this.venda = venda;
 	}
+
+	public BigDecimal getValor() {
+		return valor;
+	}
+
+	public BigDecimal getCashback() {
+		return cashback;
+	}
 }

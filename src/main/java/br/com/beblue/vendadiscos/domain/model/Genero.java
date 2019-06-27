@@ -31,15 +31,23 @@ public class Genero extends EntityBase {
 
 	public BigDecimal getPercentualCashback() {
 		
-		if (CollectionUtils.isEmpty(cashback)) {
+		if (CollectionUtils.isEmpty(getCashback())) {
 			return BigDecimal.ZERO;
 		}
-		Optional<Cashback> cashback = this.cashback.stream()
+		Optional<Cashback> cashback = this.getCashback().stream()
 			.filter(c -> c.getDia().equals(LocalDateTime.now().getDayOfWeek()))
 			.findFirst();
 		if (!cashback.isPresent()) {
 			return BigDecimal.ZERO;
 		}
 		return cashback.get().getPercentual();
+	}
+
+	public List<Cashback> getCashback() {
+		return cashback;
+	}
+
+	public void setCashback(List<Cashback> cashback) {
+		this.cashback = cashback;
 	}
 }

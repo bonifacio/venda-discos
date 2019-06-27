@@ -144,7 +144,7 @@ public class VendaServiceAdapterTest {
 	}
 	
 	@Test
-	public void deve_quando() {
+	public void deveRegistrarNoItemOPercentualDoDiaParaDeterminadoGenero() {
 		
 		ItemDTO itemDTO = new ItemDTO();
 		itemDTO.setQuantidade(1);
@@ -156,6 +156,8 @@ public class VendaServiceAdapterTest {
 		
 		doNothing().when(vendaRepository).registrarVenda(any(Venda.class));
 		
-		vendaService.registrarVenda(Arrays.asList(itemDTO));
+		VendaDTO vendaDTO = vendaService.registrarVenda(Arrays.asList(itemDTO));
+		assertNotNull(vendaDTO);
+		assertEquals(disco.getCashback(), vendaDTO.getItens().get(0).getCashback());
 	}
 }

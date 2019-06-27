@@ -1,11 +1,13 @@
 package br.com.beblue.vendadiscos;
 
 import java.math.BigDecimal;
+import java.time.DayOfWeek;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 import br.com.beblue.vendadiscos.domain.model.Artista;
+import br.com.beblue.vendadiscos.domain.model.Cashback;
 import br.com.beblue.vendadiscos.domain.model.Disco;
 import br.com.beblue.vendadiscos.domain.model.Genero;
 import br.com.beblue.vendadiscos.domain.model.Item;
@@ -29,11 +31,26 @@ public class MockFactory {
 		disco.setId(id);
 		disco.setPreco(new BigDecimal(10));
 		Artista artista = new Artista();
-		artista.adicionarGenero(new Genero());
+		Genero genero = new Genero();
+		genero.setCashback(montarCashback());
+		artista.adicionarGenero(genero);
 		disco.adicionarArtista(artista);
 		return disco;
 	}
 	
+	private static List<Cashback> montarCashback() {
+		
+		return Arrays.asList(
+				new Cashback(DayOfWeek.SUNDAY, new BigDecimal(1)),
+				new Cashback(DayOfWeek.MONDAY, new BigDecimal(2)),
+				new Cashback(DayOfWeek.TUESDAY, new BigDecimal(3)),
+				new Cashback(DayOfWeek.WEDNESDAY, new BigDecimal(4)),
+				new Cashback(DayOfWeek.THURSDAY, new BigDecimal(5)),
+				new Cashback(DayOfWeek.FRIDAY, new BigDecimal(6)),
+				new Cashback(DayOfWeek.SATURDAY, new BigDecimal(7)));
+	}
+
+
 	public static List<Venda> montarListaVendas(int tamanhoPagina) {
 
 		List<Venda> vendas = new ArrayList<>();

@@ -1,5 +1,7 @@
 package br.com.beblue.vendadiscos.domain.model.dto;
 
+import java.math.BigDecimal;
+
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
@@ -15,12 +17,15 @@ public class ItemDTO {
 	@NotNull
 	@Min(1)
 	private Integer quantidade;
+
+	private BigDecimal cashback;
 	
 	public ItemDTO() { }
 	
 	public ItemDTO(Item item) {
 		idDisco = item.getDisco().getId();
 		quantidade = item.getQuantidade();
+		cashback = item.getCashback();
 	}
 	
 	public Long getIdDisco() {
@@ -37,5 +42,9 @@ public class ItemDTO {
 	
 	public void setQuantidade(Integer quantidade) {
 		this.quantidade = quantidade;
+	}
+	
+	public BigDecimal getCashback() {
+		return cashback;
 	}
 }
