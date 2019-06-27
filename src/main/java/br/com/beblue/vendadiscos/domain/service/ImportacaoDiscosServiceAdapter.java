@@ -126,7 +126,7 @@ public class ImportacaoDiscosServiceAdapter implements ImportacaoDiscosServicePo
 		} else {
 			disco.setIdSpotify(discoImportado.getId());
 			disco.setNome(discoImportado.getName());
-			disco.setPreco(new BigDecimal(Math.random() * 100));
+			disco.setPreco(BigDecimal.valueOf(Math.random() * 100));
 		}
 		disco.adicionarArtista(artista);
 		return discoRepository.salvar(disco);

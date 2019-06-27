@@ -112,7 +112,7 @@ public class VendaServiceAdapterTest {
 	@Test(expected = BusinessException.class)
 	public void deveLancarUmaExcecao_quandoOIdDiscoDePeloMenosUmDosItensForNulo() {
 
-		ItemDTO itemDTO = new ItemDTO();
+		ItemDTO itemDTO = MockFactory.montarItemDTO();
 		itemDTO.setIdDisco(null);
 		vendaService.registrarVenda(Arrays.asList(itemDTO));
 	}
@@ -120,7 +120,7 @@ public class VendaServiceAdapterTest {
 	@Test(expected = BusinessException.class)
 	public void deveLancarUmaExcecao_quandoAQuantidadeDePeloMenosUmDosItensForNulo() {
 
-		ItemDTO itemDTO = new ItemDTO();
+		ItemDTO itemDTO = MockFactory.montarItemDTO();
 		itemDTO.setQuantidade(null);
 		vendaService.registrarVenda(Arrays.asList(itemDTO));
 	}
@@ -128,7 +128,7 @@ public class VendaServiceAdapterTest {
 	@Test(expected = BusinessException.class)
 	public void deveLancarUmaExcecao_quandoAQuantidadeDePeloMenosUmDosItensForMenorQueUm() {
 
-		ItemDTO itemDTO = new ItemDTO();
+		ItemDTO itemDTO = MockFactory.montarItemDTO();
 		itemDTO.setQuantidade(0);
 		vendaService.registrarVenda(Arrays.asList(itemDTO));
 	}
@@ -136,7 +136,7 @@ public class VendaServiceAdapterTest {
 	@Test(expected = BusinessException.class)
 	public void deveLancarUmaExcecao_quandoOIdDiscoNaoExistirNoRepositorio() {
 
-		ItemDTO itemDTO = new ItemDTO();
+		ItemDTO itemDTO = MockFactory.montarItemDTO();
 		itemDTO.setQuantidade(1);
 		itemDTO.setIdDisco(999L);
 		when(discoRepository.obterPorId(itemDTO.getIdDisco())).thenReturn(Optional.empty());
@@ -146,7 +146,7 @@ public class VendaServiceAdapterTest {
 	@Test
 	public void deveRegistrarNoItemOPercentualDoDiaParaDeterminadoGenero() {
 		
-		ItemDTO itemDTO = new ItemDTO();
+		ItemDTO itemDTO = MockFactory.montarItemDTO();
 		itemDTO.setQuantidade(1);
 		itemDTO.setIdDisco(1L);
 		

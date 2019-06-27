@@ -12,6 +12,7 @@ import br.com.beblue.vendadiscos.domain.model.Disco;
 import br.com.beblue.vendadiscos.domain.model.Genero;
 import br.com.beblue.vendadiscos.domain.model.Item;
 import br.com.beblue.vendadiscos.domain.model.Venda;
+import br.com.beblue.vendadiscos.domain.model.dto.ItemDTO;
 
 public class MockFactory {
 
@@ -72,5 +73,20 @@ public class MockFactory {
 		item.setDisco(disco);
 		venda.setItens(Arrays.asList(item));
 		return venda;
+	}
+
+
+	public static ItemDTO montarItemDTO() {
+		
+		return new ItemDTO(montarItem());
+	}
+
+
+	private static Item montarItem() {
+		
+		Item item = new Item();
+		item.setQuantidade(1);
+		item.setDisco(montarDisco(1L));
+		return item;
 	}
 }
