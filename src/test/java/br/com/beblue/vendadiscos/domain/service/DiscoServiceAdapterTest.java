@@ -7,7 +7,6 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.when;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -19,9 +18,8 @@ import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 
-import br.com.beblue.vendadiscos.domain.model.Artista;
+import br.com.beblue.vendadiscos.MockFactory;
 import br.com.beblue.vendadiscos.domain.model.Disco;
-import br.com.beblue.vendadiscos.domain.model.Genero;
 import br.com.beblue.vendadiscos.domain.model.dto.DiscoDTO;
 import br.com.beblue.vendadiscos.domain.model.filter.util.Pagina;
 import br.com.beblue.vendadiscos.domain.repository.DiscoRepositoryPort;
@@ -42,7 +40,7 @@ public class DiscoServiceAdapterTest {
 		int tamanhoPagina = 20;
 		Pagina pagina = new Pagina(numeroPagina, tamanhoPagina);
 		
-		List<Disco> discos = montarListaDiscos(pagina.getTamanho());
+		List<Disco> discos = MockFactory.montarListaDiscos(pagina.getTamanho());
 		Page<Disco> page = new PageImpl<Disco>(discos);
 		when(discoRepository.pesquisar(any(), eq(pagina), any())).thenReturn(page);
 		
@@ -59,7 +57,7 @@ public class DiscoServiceAdapterTest {
 		int numeroPagina = 0;
 		int tamanhoPagina = 9;
 		Pagina pagina = new Pagina(numeroPagina, tamanhoPagina);
-		List<Disco> discos = montarListaDiscos(pagina.getTamanho());
+		List<Disco> discos = MockFactory.montarListaDiscos(pagina.getTamanho());
 		Page<Disco> page = new PageImpl<Disco>(discos);
 		
 		when(discoRepository.pesquisar(any(), eq(pagina), any())).thenReturn(page);
@@ -84,7 +82,7 @@ public class DiscoServiceAdapterTest {
 	public void deveRetornarDisco_quandoExistirDiscoComOIdPassado() {
 		
 		long id = 1L;
-		Disco disco = montarDisco(id);
+		Disco disco = MockFactory.montarDisco(id);
 		disco.setId(id);
 		DiscoDTO discoDTO = new DiscoDTO(disco);
 		
@@ -94,25 +92,5 @@ public class DiscoServiceAdapterTest {
 		
 		assertNotNull(discoDTOretornado);
 		assertEquals("id", discoDTO.getId(), discoDTOretornado.getId());
-	}
-	
-	private List<Disco> montarListaDiscos(int tamanhoPagina) {
-		
-		List<Disco> discos = new ArrayList<>();
-		for (int i = 1; i <= tamanhoPagina; i++) {
-			Disco disco = montarDisco(i);
-			discos.add(disco);
-		}
-		return discos;
-	}
-
-
-	private Disco montarDisco(long id) {
-		Disco disco = new Disco();
-		disco.setId(id);
-		Artista artista = new Artista();
-		artista.adicionarGenero(new Genero());
-		disco.adicionarArtista(artista);
-		return disco;
 	}
 }

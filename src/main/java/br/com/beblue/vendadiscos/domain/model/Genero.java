@@ -9,6 +9,8 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 
+import org.springframework.util.CollectionUtils;
+
 import br.com.beblue.vendadiscos.domain.model.base.EntityBase;
 
 @Entity
@@ -29,6 +31,9 @@ public class Genero extends EntityBase {
 
 	public BigDecimal getPercentualCashback() {
 		
+		if (CollectionUtils.isEmpty(cashback)) {
+			return BigDecimal.ZERO;
+		}
 		Optional<Cashback> cashback = this.cashback.stream()
 			.filter(c -> c.getDia().equals(LocalDateTime.now().getDayOfWeek()))
 			.findFirst();

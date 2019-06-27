@@ -3,7 +3,11 @@ package br.com.beblue.vendadiscos.domain.service;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Collectors;
+
+import javax.validation.Validation;
+import javax.validation.Validator;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -13,6 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 
 import br.com.beblue.vendadiscos.domain.exception.BusinessException;
+import br.com.beblue.vendadiscos.domain.model.Disco;
 import br.com.beblue.vendadiscos.domain.model.Item;
 import br.com.beblue.vendadiscos.domain.model.Venda;
 import br.com.beblue.vendadiscos.domain.model.Venda_;
@@ -67,14 +72,16 @@ public class VendaServiceAdapter implements VendaServicePort {
 	@Transactional
 	public VendaDTO registrarVenda(final List<ItemDTO> itensDTO) {
 		
-		if (CollectionUtils.isEmpty(itensDTO)) {
-			throw new BusinessException("Para realizar uma compra é necessário escolher pelo menos um item.");
-		}
+		validarItensDaVenda(itensDTO);
 		Venda venda = new Venda();
 		List<Item> itens = itensDTO.stream().map(itemDTO -> {
 			Item item = new Item();
 			item.setQuantidade(itemDTO.getQuantidade());
-			item.setDisco(discoRepository.obterPorId(itemDTO.getIdDisco()).get());
+			Optional<Disco> optionalDisco = discoRepository.obterPorId(itemDTO.getIdDisco());
+			if (!optionalDisco.isPresent()) {
+				throw new BusinessException(String.format("Disco %s não encontrado.", itemDTO.getIdDisco()));
+			}
+			item.setDisco(optionalDisco.get()); 
 			item.setVenda(venda);
 			return item;
 		})
@@ -83,5 +90,23 @@ public class VendaServiceAdapter implements VendaServicePort {
 		venda.setData(LocalDateTime.now());
 		vendaRepository.registrarVenda(venda);
 		return new VendaDTO(venda);
+	}
+
+	private void validarItensDaVenda(final List<ItemDTO> itensDTO) {
+		
+		if (CollectionUtils.isEmpty(itensDTO)) {
+			throw new BusinessException("Para realizar uma compra é necessário escolher pelo menos um item.");
+		}
+		
+		Validator validador = Validation.buildDefaultValidatorFactory().getValidator();
+		Set<String> erros = itensDTO.stream()
+			.map(item -> validador.validate(item))
+			.flatMap(Set::stream)
+			.map(violation -> String.format("%s: %s", violation.getPropertyPath(), violation.getMessage()))
+			.collect(Collectors.toSet());
+			
+		if (!CollectionUtils.isEmpty(erros)) {
+			throw new BusinessException(String.join(", ", erros));
+		}
 	}
 }
