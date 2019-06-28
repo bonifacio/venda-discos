@@ -35,8 +35,8 @@ public class Item extends EntityBase {
 	
 	public void setDisco(Disco disco) {
 		this.disco = disco;
-		this.valor = disco.getPreco();
-		this.cashback = disco.getCashback();
+		this.valor = disco.getPreco().multiply(new BigDecimal(quantidade));
+		this.cashback = disco.getCashback().multiply(new BigDecimal(quantidade));
 	}
 	
 	public Integer getQuantidade() {
@@ -45,5 +45,21 @@ public class Item extends EntityBase {
 	
 	public void setQuantidade(Integer quantidade) {
 		this.quantidade = quantidade;
+	}
+
+	public Venda getVenda() {
+		return venda;
+	}
+
+	public void setVenda(Venda venda) {
+		this.venda = venda;
+	}
+
+	public BigDecimal getValor() {
+		return valor;
+	}
+
+	public BigDecimal getCashback() {
+		return cashback;
 	}
 }

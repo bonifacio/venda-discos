@@ -14,4 +14,6 @@ public interface VendaRepositoryPort {
 	Page<Venda> pesquisar(VendaFilter filtro, Pagina pagina, Ordenacao ordenacao);
 
 	Optional<Venda> obterPorId(Long id);
+
+	void registrarVenda(Venda venda);
 }

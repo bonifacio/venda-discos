@@ -31,9 +31,9 @@ public class DiscoServiceAdapter implements DiscoServicePort {
 	public Page<DiscoDTO> pesquisar(DiscoFilter filtro, int numeroPagina, int tamanhoPagina) {
 
 		Pagina pagina = new Pagina(numeroPagina, tamanhoPagina);
-		Ordenacao ordenacao = new Ordenacao(Disco_.nome.getName(), Ordenacao.Direcao.ASC);
+		Ordenacao ordenacao = new Ordenacao(Disco_.NOME, Ordenacao.Direcao.ASC);
 		Page<Disco> discosPaginados = discoRepository.pesquisar(filtro, pagina, ordenacao);
-		return new PageImpl<DiscoDTO>(
+		return new PageImpl<>(
 				DiscoConverter.paraDTO(discosPaginados.getContent()),
 				discosPaginados.getPageable(),
 				discosPaginados.getTotalElements());

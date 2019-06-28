@@ -61,4 +61,8 @@ public class VendaRepositoryAdapter implements VendaRepositoryPort {
 		return vendaRepository.findById(id);
 	}
 
+	@Override
+	public void registrarVenda(Venda venda) {
+		vendaRepository.save(venda);
+	}
 }

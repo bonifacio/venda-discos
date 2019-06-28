@@ -8,6 +8,10 @@ import br.com.beblue.vendadiscos.domain.model.dto.VendaDTO;
 
 public class VendaConverter {
 
+	private VendaConverter() {
+		throw new IllegalStateException("Utility class");
+	}
+	
 	public static List<VendaDTO> paraDTO(List<Venda> vendas) {
 		
 		return vendas.stream().map(VendaDTO::new).collect(Collectors.toList());
