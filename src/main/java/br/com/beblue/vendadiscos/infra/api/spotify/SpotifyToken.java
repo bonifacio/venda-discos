@@ -1,25 +1,29 @@
 package br.com.beblue.vendadiscos.infra.api.spotify;
 
+import com.fasterxml.jackson.annotation.JsonAlias;
+
 public class SpotifyToken {
 
-	private String access_token;
+	@JsonAlias("access_token")
+	private String accessToken;
 	
-	private String token_type;
+	@JsonAlias("token_type")
+	private String tokenType;
 
-	public String getAccess_token() {
-		return access_token;
+	public String getAccessToken() {
+		return accessToken;
 	}
 
-	public void setAccess_token(String access_token) {
-		this.access_token = access_token;
+	public void setAccessToken(String accessToken) {
+		this.accessToken = accessToken;
 	}
 
-	public String getToken_type() {
-		return token_type;
+	public String getTokenType() {
+		return tokenType;
 	}
 
-	public void setToken_type(String token_type) {
-		this.token_type = token_type;
+	public void setTokenType(String tokenType) {
+		this.tokenType = tokenType;
 	}
 
 }

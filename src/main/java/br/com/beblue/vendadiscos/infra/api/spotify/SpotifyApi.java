@@ -50,7 +50,7 @@ public class SpotifyApi {
 		MultiValueMap<String, String> map = new LinkedMultiValueMap<>();
 		map.add("grant_type", "client_credentials");
 
-		HttpEntity<MultiValueMap<String, String>> request = new HttpEntity<MultiValueMap<String,String>>(map, headers);
+		HttpEntity<MultiValueMap<String, String>> request = new HttpEntity<>(map, headers);
 
 		ResponseEntity<SpotifyToken> responseEntity = 
 				new RestTemplate().exchange("https://accounts.spotify.com/api/token ", HttpMethod.POST, request, SpotifyToken.class);
@@ -68,7 +68,7 @@ public class SpotifyApi {
 
 	private HttpHeaders obterHttpHeaders() {
 		HttpHeaders headers = new HttpHeaders();
-		headers.add(HttpHeaders.AUTHORIZATION, String.format("%s %s", token.getToken_type(), token.getAccess_token()));
+		headers.add(HttpHeaders.AUTHORIZATION, String.format("%s %s", token.getTokenType(), token.getAccessToken()));
 		return headers;
 	}
 

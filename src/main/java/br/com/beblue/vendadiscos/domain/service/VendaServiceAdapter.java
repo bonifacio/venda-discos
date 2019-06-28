@@ -7,7 +7,6 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import javax.validation.Validation;
-import javax.validation.Validator;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -52,7 +51,7 @@ public class VendaServiceAdapter implements VendaServicePort {
 		Pagina pagina = new Pagina(numeroPagina, tamanhoPagina);
 		Ordenacao ordenacao = new Ordenacao(Venda_.DATA, Ordenacao.Direcao.DESC);
 		Page<Venda> vendasPaginadas = vendaRepository.pesquisar(filtro, pagina, ordenacao);
-		return new PageImpl<VendaDTO>(
+		return new PageImpl<>(
 				VendaConverter.paraDTO(vendasPaginadas.getContent()),
 				vendasPaginadas.getPageable(),
 				vendasPaginadas.getTotalElements());
@@ -98,9 +97,8 @@ public class VendaServiceAdapter implements VendaServicePort {
 			throw new BusinessException("Para realizar uma compra é necessário escolher pelo menos um item.");
 		}
 		
-		Validator validador = Validation.buildDefaultValidatorFactory().getValidator();
 		Set<String> erros = itensDTO.stream()
-			.map(item -> validador.validate(item))
+			.map(Validation.buildDefaultValidatorFactory().getValidator()::validate)
 			.flatMap(Set::stream)
 			.map(violation -> String.format("%s: %s", violation.getPropertyPath(), violation.getMessage()))
 			.collect(Collectors.toSet());

@@ -34,13 +34,13 @@ public class Genero extends EntityBase {
 		if (CollectionUtils.isEmpty(getCashback())) {
 			return BigDecimal.ZERO;
 		}
-		Optional<Cashback> cashback = this.getCashback().stream()
+		Optional<Cashback> cashbackDoDia = this.getCashback().stream()
 			.filter(c -> c.getDia().equals(LocalDateTime.now().getDayOfWeek()))
 			.findFirst();
-		if (!cashback.isPresent()) {
+		if (!cashbackDoDia.isPresent()) {
 			return BigDecimal.ZERO;
 		}
-		return cashback.get().getPercentual();
+		return cashbackDoDia.get().getPercentual();
 	}
 
 	public List<Cashback> getCashback() {

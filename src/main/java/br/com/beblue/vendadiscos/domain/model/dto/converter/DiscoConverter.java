@@ -7,6 +7,10 @@ import br.com.beblue.vendadiscos.domain.model.Disco;
 import br.com.beblue.vendadiscos.domain.model.dto.DiscoDTO;
 
 public class DiscoConverter {
+	
+	private DiscoConverter() {
+		throw new IllegalStateException("Utility class");
+	}
 
 	public static List<DiscoDTO> paraDTO(List<Disco> discos) {
 		

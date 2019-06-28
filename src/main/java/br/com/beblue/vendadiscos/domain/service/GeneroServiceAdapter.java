@@ -23,7 +23,7 @@ public class GeneroServiceAdapter implements GeneroServicePort {
 	@Override
 	public List<GeneroDTO> obterTodos() {
 		List<Genero> generos = generoRepository.obterTodos();
-		return generos.stream().map(g -> new GeneroDTO(g)).collect(Collectors.toList());
+		return generos.stream().map(GeneroDTO::new).collect(Collectors.toList());
 	}
 	
 }
