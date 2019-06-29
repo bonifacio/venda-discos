@@ -17,6 +17,10 @@ public class DiscoDTO {
 	private Set<String> artistas;
 	private Set<String> genero;
 	private BigDecimal preco;
+	
+	public DiscoDTO() {
+	
+	}
 
 	public DiscoDTO(Disco disco) {
 		id = disco.getId();

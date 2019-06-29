@@ -9,6 +9,10 @@ public class GeneroDTO {
 	private Long id;
 	
 	private String nome;
+	
+	public GeneroDTO() {
+		
+	}
 
 	public GeneroDTO(Genero genero) {
 		this.id = genero.getId();
