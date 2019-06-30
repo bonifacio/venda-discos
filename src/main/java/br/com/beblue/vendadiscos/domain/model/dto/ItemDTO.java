@@ -21,7 +21,8 @@ public class ItemDTO {
 	private BigDecimal cashback;
 	
 	public ItemDTO() {
-	
+		idDisco = -1L;
+		quantidade = 1;
 	}
 	
 	public ItemDTO(Item item) {
