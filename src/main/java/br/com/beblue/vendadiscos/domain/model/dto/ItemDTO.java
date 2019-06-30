@@ -20,9 +20,8 @@ public class ItemDTO {
 
 	private BigDecimal cashback;
 	
-	public ItemDTO(Long idDisco, Integer quantidade) {
-		this.idDisco = idDisco;
-		this.quantidade = quantidade;
+	public ItemDTO() {
+	
 	}
 	
 	public ItemDTO(Item item) {
