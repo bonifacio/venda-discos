@@ -69,9 +69,7 @@ public class VendaResourceIntegrationTest {
 	@Test
 	public void deveRetornarErro_quandoNaoExistirODiscoInformado() throws Exception {
 		
-		ItemDTO itemDTO = new ItemDTO();
-		itemDTO.setIdDisco(9999999L);
-		itemDTO.setQuantidade(1);
+		ItemDTO itemDTO = new ItemDTO(9999999L, 1);
 		List<ItemDTO> itemDTOs = Arrays.asList(itemDTO);
 		
 		mockMvc.perform(post("/venda").contentType(MediaType.APPLICATION_JSON).content(objetoParaString(itemDTOs)))
@@ -84,9 +82,7 @@ public class VendaResourceIntegrationTest {
 		
 		Disco disco = inserirDiscoNoRepositorio();
 		
-		ItemDTO itemDTO = new ItemDTO();
-		itemDTO.setIdDisco(disco.getId());
-		itemDTO.setQuantidade(1);
+		ItemDTO itemDTO = new ItemDTO(disco.getId(), 1);
 		List<ItemDTO> itemDTOs = Arrays.asList(itemDTO);
 		
 		mockMvc.perform(post("/venda").contentType(MediaType.APPLICATION_JSON).content(objetoParaString(itemDTOs)))
@@ -108,9 +104,7 @@ public class VendaResourceIntegrationTest {
 		
 		Disco disco = inserirDiscoNoRepositorio();
 		
-		ItemDTO itemDTO = new ItemDTO();
-		itemDTO.setIdDisco(disco.getId());
-		itemDTO.setQuantidade(1);
+		ItemDTO itemDTO = new ItemDTO(disco.getId(), 1);
 		List<ItemDTO> itemDTOs = Arrays.asList(itemDTO);
 		
 		MvcResult result = mockMvc.perform(post("/venda").contentType(MediaType.APPLICATION_JSON).content(objetoParaString(itemDTOs)))
