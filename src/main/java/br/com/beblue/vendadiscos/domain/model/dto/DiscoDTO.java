@@ -17,6 +17,7 @@ public class DiscoDTO {
 	private Set<String> artistas;
 	private Set<String> generos;
 	private BigDecimal preco;
+	private BigDecimal cashback;
 	
 	public DiscoDTO() { }
 
@@ -26,6 +27,7 @@ public class DiscoDTO {
 		artistas = disco.getArtistas().stream().map(Artista::getNome).collect(Collectors.toSet());
 		generos = disco.getArtistas().stream().map(Artista::getGeneros).flatMap(Set::stream).map(Genero::getNome).collect(Collectors.toSet());
 		preco = disco.getPreco();
+		cashback = disco.getCashback();
 	}
 
 	public Long getId() {
@@ -42,6 +44,10 @@ public class DiscoDTO {
 
 	public Set<String> getGeneros() {
 		return generos;
+	}
+	
+	public BigDecimal getCashback() {
+		return cashback;
 	}
 
 	public BigDecimal getPreco() {

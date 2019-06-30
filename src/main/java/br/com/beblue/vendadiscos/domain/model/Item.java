@@ -36,7 +36,7 @@ public class Item extends EntityBase {
 	public void setDisco(Disco disco) {
 		this.disco = disco;
 		this.valor = disco.getPreco().multiply(new BigDecimal(quantidade));
-		this.cashback = disco.getCashback().multiply(new BigDecimal(quantidade));
+		this.cashback = disco.getCashback();
 	}
 	
 	public Integer getQuantidade() {

@@ -19,6 +19,8 @@ public class ItemDTO {
 	private Integer quantidade;
 
 	private BigDecimal cashback;
+
+	private BigDecimal valor;
 	
 	public ItemDTO() {
 		idDisco = -1L;
@@ -29,6 +31,7 @@ public class ItemDTO {
 		idDisco = item.getDisco().getId();
 		quantidade = item.getQuantidade();
 		cashback = item.getCashback();
+		valor = item.getValor();
 	}
 	
 	public Long getIdDisco() {
@@ -49,5 +52,9 @@ public class ItemDTO {
 	
 	public BigDecimal getCashback() {
 		return cashback;
+	}
+	
+	public BigDecimal getValor() {
+		return valor;
 	}
 }
