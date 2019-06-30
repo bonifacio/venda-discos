@@ -18,9 +18,7 @@ public class DiscoDTO {
 	private Set<String> generos;
 	private BigDecimal preco;
 	
-	public DiscoDTO() {
-	
-	}
+	public DiscoDTO() { }
 
 	public DiscoDTO(Disco disco) {
 		id = disco.getId();

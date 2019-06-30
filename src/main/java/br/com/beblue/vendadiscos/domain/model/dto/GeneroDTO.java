@@ -10,9 +10,7 @@ public class GeneroDTO {
 	
 	private String nome;
 	
-	public GeneroDTO() {
-		
-	}
+	public GeneroDTO() { }
 
 	public GeneroDTO(Genero genero) {
 		this.id = genero.getId();

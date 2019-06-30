@@ -14,6 +14,8 @@ public class VendaDTO {
 	private Long id;
 	private LocalDateTime data;
 	private List<ItemDTO> itens;
+	
+	public VendaDTO() { }
 
 	public VendaDTO(Venda venda) {
 		id = venda.getId();

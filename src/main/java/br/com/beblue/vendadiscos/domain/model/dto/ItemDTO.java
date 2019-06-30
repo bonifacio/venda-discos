@@ -20,6 +20,10 @@ public class ItemDTO {
 
 	private BigDecimal cashback;
 	
+	public ItemDTO() {
+	
+	}
+	
 	public ItemDTO(Item item) {
 		idDisco = item.getDisco().getId();
 		quantidade = item.getQuantidade();

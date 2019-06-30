@@ -6,7 +6,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import java.math.BigDecimal;
 
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,9 +19,9 @@ import br.com.beblue.vendadiscos.domain.model.Disco;
 import br.com.beblue.vendadiscos.infra.repository.DiscoRepository;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest( properties = {"job.autorun.enabled=false"} ) 
+@SpringBootTest( properties = { "job.autorun.enabled=false" } )
 @AutoConfigureMockMvc
-public class DiscoResourceTest {
+public class DiscoResourceIntegrationTest {
 	
 	@Autowired
 	private DiscoRepository discoRepository;
@@ -30,13 +29,8 @@ public class DiscoResourceTest {
 	@Autowired
 	private MockMvc mockMvc;
 	
-	@Before
-	public void configureMockMvc() {
-		
-	}
-
 	@Test
-	public void deveRetornarUmaListaDeDiscos() throws Exception {
+	public void deveRetornarUmaListaDeDiscosPaginada() throws Exception {
 		
 		mockMvc.perform(get("/disco").accept(MediaType.APPLICATION_JSON_UTF8))
 			.andExpect(status().isOk())
