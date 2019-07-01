@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/disco")
 public class DiscoResource {
 
-    private DiscoServicePort discoService;
+    private final DiscoServicePort discoService;
 
     @Autowired
     public DiscoResource(DiscoServicePort discoService) {

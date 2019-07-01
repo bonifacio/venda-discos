@@ -15,7 +15,7 @@ import java.util.List;
 @RequestMapping("/venda")
 public class VendaResource {
 
-    private VendaServicePort vendaService;
+    private final VendaServicePort vendaService;
 
     @Autowired
     public VendaResource(VendaServicePort vendaService) {

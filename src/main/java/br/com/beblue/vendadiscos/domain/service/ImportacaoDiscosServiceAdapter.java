@@ -36,13 +36,13 @@ public class ImportacaoDiscosServiceAdapter implements ImportacaoDiscosServicePo
     @Value("${importacao-discos.discos_por_vez}")
     private int discosPorVez;
 
-    private ImportacaoDiscosRepositoryPort importacaoDiscosRepository;
+    private final ImportacaoDiscosRepositoryPort importacaoDiscosRepository;
 
-    private ArtistaRepositoryPort artistaRepository;
+    private final ArtistaRepositoryPort artistaRepository;
 
-    private GeneroRepositoryPort generoRepository;
+    private final GeneroRepositoryPort generoRepository;
 
-    private DiscoRepositoryPort discoRepository;
+    private final DiscoRepositoryPort discoRepository;
 
     @Autowired
     public ImportacaoDiscosServiceAdapter(
@@ -109,10 +109,7 @@ public class ImportacaoDiscosServiceAdapter implements ImportacaoDiscosServicePo
         if (disco.possuiApenasUmArtista()) {
             return false;
         }
-        if (disco.possuiMaisDeUmGenero()) {
-            return false;
-        }
-        return true;
+        return !disco.possuiMaisDeUmGenero();
     }
 
     private Disco salvarDiscoImportado(Artista artista, DiscoSpotify discoImportado) {

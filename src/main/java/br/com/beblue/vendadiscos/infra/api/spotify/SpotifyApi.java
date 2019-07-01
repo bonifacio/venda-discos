@@ -14,8 +14,9 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import javax.annotation.PostConstruct;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
+import java.util.Objects;
 
 @Service
 public class SpotifyApi {
@@ -88,7 +89,7 @@ public class SpotifyApi {
         ResponseEntity<ArtistaSpotifyResponse> responseEntity =
                 new RestTemplate().exchange(uriSearchArtist, HttpMethod.GET, request, ArtistaSpotifyResponse.class);
 
-        return responseEntity.getBody().getArtists().getItems().stream().collect(Collectors.toList());
+        return new ArrayList<>(Objects.requireNonNull(responseEntity.getBody()).getArtists().getItems());
     }
 
     public DiscoSpotify obterDisco(String idArtista, int indiceDoDisco) {
@@ -96,6 +97,6 @@ public class SpotifyApi {
         HttpEntity<String> request = new HttpEntity<>(obterHttpHeaders());
         String uriArtistsAlbums = uriArtistsAlbums(idArtista, indiceDoDisco);
         ResponseEntity<DiscoResponseSpotify> responseEntity = new RestTemplate().exchange(uriArtistsAlbums, HttpMethod.GET, request, DiscoResponseSpotify.class);
-        return responseEntity.getBody().getItems().get(0);
+        return Objects.requireNonNull(responseEntity.getBody()).getItems().get(0);
     }
 }

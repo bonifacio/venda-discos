@@ -30,9 +30,9 @@ import java.util.stream.Collectors;
 @Service
 public class VendaServiceAdapter implements VendaServicePort {
 
-    private VendaRepositoryPort vendaRepository;
+    private final VendaRepositoryPort vendaRepository;
 
-    private DiscoRepositoryPort discoRepository;
+    private final DiscoRepositoryPort discoRepository;
 
     @Autowired
     public VendaServiceAdapter(
@@ -59,10 +59,7 @@ public class VendaServiceAdapter implements VendaServicePort {
     public VendaDTO obterPorId(Long id) {
 
         Optional<Venda> venda = vendaRepository.obterPorId(id);
-        if (!venda.isPresent()) {
-            return null;
-        }
-        return VendaConverter.paraDTO(venda.get());
+        return venda.map(VendaConverter::paraDTO).orElse(null);
     }
 
     @Override

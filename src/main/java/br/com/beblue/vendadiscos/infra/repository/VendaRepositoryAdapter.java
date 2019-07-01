@@ -20,7 +20,7 @@ import java.util.Optional;
 @Repository
 public class VendaRepositoryAdapter implements VendaRepositoryPort {
 
-    private VendaRepository vendaRepository;
+    private final VendaRepository vendaRepository;
 
     public VendaRepositoryAdapter(VendaRepository vendaRepository) {
         this.vendaRepository = vendaRepository;

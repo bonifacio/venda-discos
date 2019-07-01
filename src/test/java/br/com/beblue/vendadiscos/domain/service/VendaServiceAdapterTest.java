@@ -17,7 +17,7 @@ import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 
-import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -47,7 +47,7 @@ public class VendaServiceAdapterTest {
         Pagina pagina = new Pagina(numeroPagina, tamanhoPagina);
 
         List<Venda> discos = MockFactory.montarListaVendas(pagina.getTamanho());
-        Page<Venda> page = new PageImpl<Venda>(discos);
+        Page<Venda> page = new PageImpl<>(discos);
         when(vendaRepository.pesquisar(any(), eq(pagina), any())).thenReturn(page);
 
         Page<VendaDTO> retornoNumeroPaginaMenorQueZero = vendaService.pesquisar(null, numeroPagina, tamanhoPagina);
@@ -64,7 +64,7 @@ public class VendaServiceAdapterTest {
         int tamanhoPagina = 9;
         Pagina pagina = new Pagina(numeroPagina, tamanhoPagina);
         List<Venda> discos = MockFactory.montarListaVendas(pagina.getTamanho());
-        Page<Venda> page = new PageImpl<Venda>(discos);
+        Page<Venda> page = new PageImpl<>(discos);
 
         when(vendaRepository.pesquisar(any(), eq(pagina), any())).thenReturn(page);
 
@@ -103,7 +103,7 @@ public class VendaServiceAdapterTest {
     @Test(expected = BusinessException.class)
     public void deveLancarUmaExcessao_quandoAListaDeItensForVazia() {
 
-        vendaService.registrarVenda(Arrays.asList());
+        vendaService.registrarVenda(Collections.emptyList());
     }
 
     @Test(expected = BusinessException.class)
@@ -111,7 +111,7 @@ public class VendaServiceAdapterTest {
 
         ItemDTO itemDTO = MockFactory.montarItemDTO();
         itemDTO.setIdDisco(null);
-        vendaService.registrarVenda(Arrays.asList(itemDTO));
+        vendaService.registrarVenda(Collections.singletonList(itemDTO));
     }
 
     @Test(expected = BusinessException.class)
@@ -119,7 +119,7 @@ public class VendaServiceAdapterTest {
 
         ItemDTO itemDTO = MockFactory.montarItemDTO();
         itemDTO.setQuantidade(null);
-        vendaService.registrarVenda(Arrays.asList(itemDTO));
+        vendaService.registrarVenda(Collections.singletonList(itemDTO));
     }
 
     @Test(expected = BusinessException.class)
@@ -127,7 +127,7 @@ public class VendaServiceAdapterTest {
 
         ItemDTO itemDTO = MockFactory.montarItemDTO();
         itemDTO.setQuantidade(0);
-        vendaService.registrarVenda(Arrays.asList(itemDTO));
+        vendaService.registrarVenda(Collections.singletonList(itemDTO));
     }
 
     @Test(expected = BusinessException.class)
@@ -137,7 +137,7 @@ public class VendaServiceAdapterTest {
         itemDTO.setQuantidade(1);
         itemDTO.setIdDisco(999L);
         when(discoRepository.obterPorId(itemDTO.getIdDisco())).thenReturn(Optional.empty());
-        vendaService.registrarVenda(Arrays.asList(itemDTO));
+        vendaService.registrarVenda(Collections.singletonList(itemDTO));
     }
 
     @Test
@@ -153,7 +153,7 @@ public class VendaServiceAdapterTest {
 
         doNothing().when(vendaRepository).registrarVenda(any(Venda.class));
 
-        VendaDTO vendaDTO = vendaService.registrarVenda(Arrays.asList(itemDTO));
+        VendaDTO vendaDTO = vendaService.registrarVenda(Collections.singletonList(itemDTO));
         assertNotNull(vendaDTO);
         assertEquals(disco.getCashback(), vendaDTO.getItens().get(0).getCashback());
     }

@@ -9,7 +9,6 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -48,8 +47,8 @@ public class GeneroServiceAdapterTest {
 
         GeneroDTO generoDTO = new GeneroDTO(genero);
 
-        List<Genero> generos = Arrays.asList(genero);
-        List<GeneroDTO> generosDTO = Arrays.asList(generoDTO);
+        List<Genero> generos = Collections.singletonList(genero);
+        List<GeneroDTO> generosDTO = Collections.singletonList(generoDTO);
 
         when(generoRepository.obterTodos()).thenReturn(generos);
 

@@ -10,7 +10,7 @@ import java.util.List;
 @Repository
 public class GeneroRepositoryAdapter implements GeneroRepositoryPort {
 
-    private GeneroRepository generoRepository;
+    private final GeneroRepository generoRepository;
 
     @Autowired
     public GeneroRepositoryAdapter(GeneroRepository generoRepository) {

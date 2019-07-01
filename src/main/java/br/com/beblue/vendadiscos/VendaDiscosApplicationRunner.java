@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 @ConditionalOnProperty(prefix = "job.autorun", name = "enabled", havingValue = "true", matchIfMissing = true)
 public class VendaDiscosApplicationRunner implements CommandLineRunner {
 
-    private ImportacaoDiscosServicePort importacaoDiscosService;
+    private final ImportacaoDiscosServicePort importacaoDiscosService;
 
     @Autowired
     public VendaDiscosApplicationRunner(ImportacaoDiscosServicePort importacaoDiscosService) {
@@ -18,7 +18,7 @@ public class VendaDiscosApplicationRunner implements CommandLineRunner {
     }
 
     @Override
-    public void run(String... args) throws Exception {
+    public void run(String... args) {
         importacaoDiscosService.importar();
     }
 }

@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
 @Service
 public class GeneroServiceAdapter implements GeneroServicePort {
 
-    private GeneroRepositoryPort generoRepository;
+    private final GeneroRepositoryPort generoRepository;
 
     @Autowired
     public GeneroServiceAdapter(GeneroRepositoryPort generoRepository) {

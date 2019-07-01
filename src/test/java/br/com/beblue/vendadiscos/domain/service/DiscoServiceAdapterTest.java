@@ -38,7 +38,7 @@ public class DiscoServiceAdapterTest {
         Pagina pagina = new Pagina(numeroPagina, tamanhoPagina);
 
         List<Disco> discos = MockFactory.montarListaDiscos(pagina.getTamanho());
-        Page<Disco> page = new PageImpl<Disco>(discos);
+        Page<Disco> page = new PageImpl<>(discos);
         when(discoRepository.pesquisar(any(), eq(pagina), any())).thenReturn(page);
 
         Page<DiscoDTO> retornoNumeroPaginaMenorQueZero = discoService.pesquisar(null, numeroPagina, tamanhoPagina);
@@ -55,7 +55,7 @@ public class DiscoServiceAdapterTest {
         int tamanhoPagina = 9;
         Pagina pagina = new Pagina(numeroPagina, tamanhoPagina);
         List<Disco> discos = MockFactory.montarListaDiscos(pagina.getTamanho());
-        Page<Disco> page = new PageImpl<Disco>(discos);
+        Page<Disco> page = new PageImpl<>(discos);
 
         when(discoRepository.pesquisar(any(), eq(pagina), any())).thenReturn(page);
 

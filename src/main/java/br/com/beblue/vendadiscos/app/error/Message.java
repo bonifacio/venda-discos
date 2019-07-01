@@ -2,7 +2,7 @@ package br.com.beblue.vendadiscos.app.error;
 
 public class Message {
 
-    private String message;
+    private final String message;
 
     public Message(String message) {
         this.message = message;

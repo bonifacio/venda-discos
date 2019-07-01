@@ -47,9 +47,7 @@ public class Pagina {
         Pagina other = (Pagina) obj;
         if (numero != other.numero)
             return false;
-        if (tamanho != other.tamanho)
-            return false;
-        return true;
+        return tamanho == other.tamanho;
     }
 
 

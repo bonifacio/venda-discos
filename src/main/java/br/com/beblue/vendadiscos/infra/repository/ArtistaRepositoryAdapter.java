@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class ArtistaRepositoryAdapter implements ArtistaRepositoryPort {
 
-    private ArtistaRepository artistaRepository;
+    private final ArtistaRepository artistaRepository;
 
     @Autowired
     public ArtistaRepositoryAdapter(ArtistaRepository artistaRepository) {

@@ -7,9 +7,7 @@ import br.com.beblue.vendadiscos.domain.model.dto.VendaDTO;
 import br.com.beblue.vendadiscos.infra.repository.ArtistaRepository;
 import br.com.beblue.vendadiscos.infra.repository.DiscoRepository;
 import br.com.beblue.vendadiscos.infra.repository.GeneroRepository;
-import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.jdk8.Jdk8Module;
@@ -27,7 +25,7 @@ import org.springframework.test.web.servlet.MvcResult;
 
 import java.io.IOException;
 import java.math.BigDecimal;
-import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -70,7 +68,7 @@ public class VendaResourceIntegrationTest {
         ItemDTO itemDTO = new ItemDTO();
         itemDTO.setIdDisco(9999999L);
         itemDTO.setQuantidade(1);
-        List<ItemDTO> itemDTOs = Arrays.asList(itemDTO);
+        List<ItemDTO> itemDTOs = Collections.singletonList(itemDTO);
 
         mockMvc.perform(post("/venda").contentType(MediaType.APPLICATION_JSON).content(objetoParaString(itemDTOs)))
                 .andExpect(status().isBadRequest())
@@ -85,7 +83,7 @@ public class VendaResourceIntegrationTest {
         ItemDTO itemDTO = new ItemDTO();
         itemDTO.setIdDisco(disco.getId());
         itemDTO.setQuantidade(1);
-        List<ItemDTO> itemDTOs = Arrays.asList(itemDTO);
+        List<ItemDTO> itemDTOs = Collections.singletonList(itemDTO);
 
         mockMvc.perform(post("/venda").contentType(MediaType.APPLICATION_JSON).content(objetoParaString(itemDTOs)))
                 .andExpect(status().isOk())
@@ -109,14 +107,14 @@ public class VendaResourceIntegrationTest {
         ItemDTO itemDTO = new ItemDTO();
         itemDTO.setIdDisco(disco.getId());
         itemDTO.setQuantidade(1);
-        List<ItemDTO> itemDTOs = Arrays.asList(itemDTO);
+        List<ItemDTO> itemDTOs = Collections.singletonList(itemDTO);
 
         MvcResult result = mockMvc.perform(post("/venda").contentType(MediaType.APPLICATION_JSON).content(objetoParaString(itemDTOs)))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id").exists())
                 .andReturn();
 
-        VendaDTO vendaDTO = stringParaObjeto(result.getResponse().getContentAsString(), VendaDTO.class);
+        VendaDTO vendaDTO = stringParaObjeto(result.getResponse().getContentAsString());
 
         mockMvc.perform(get(String.format("/venda/%s", vendaDTO.getId())).accept(MediaType.APPLICATION_JSON_UTF8))
                 .andExpect(status().isOk())
@@ -147,8 +145,8 @@ public class VendaResourceIntegrationTest {
         return OBJECT_MAPPER.writeValueAsString(itemDTOs);
     }
 
-    private <T> T stringParaObjeto(String json, Class<T> clazz) throws JsonParseException, JsonMappingException, IOException {
+    private VendaDTO stringParaObjeto(String json) throws IOException {
 
-        return OBJECT_MAPPER.readValue(json, clazz);
+        return OBJECT_MAPPER.readValue(json, VendaDTO.class);
     }
 }

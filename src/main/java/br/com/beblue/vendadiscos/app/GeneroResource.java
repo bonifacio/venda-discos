@@ -13,7 +13,7 @@ import java.util.List;
 @RequestMapping("/genero")
 public class GeneroResource {
 
-    private GeneroServicePort generoService;
+    private final GeneroServicePort generoService;
 
     @Autowired
     public GeneroResource(GeneroServicePort generoService) {

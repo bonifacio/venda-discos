@@ -2,8 +2,8 @@ package br.com.beblue.vendadiscos.domain.model.filter.util;
 
 public class Ordenacao {
 
-    private String campo;
-    private Direcao direcao;
+    private final String campo;
+    private final Direcao direcao;
 
     public Ordenacao(String campo) {
         this.campo = campo;
@@ -24,6 +24,6 @@ public class Ordenacao {
     }
 
     public enum Direcao {
-        ASC, DESC;
+        ASC, DESC
     }
 }

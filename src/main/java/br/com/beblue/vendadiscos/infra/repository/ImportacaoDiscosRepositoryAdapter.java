@@ -18,7 +18,7 @@ public class ImportacaoDiscosRepositoryAdapter implements ImportacaoDiscosReposi
 
     private static final Logger LOG = LoggerFactory.getLogger(ImportacaoDiscosRepositoryAdapter.class);
 
-    private SpotifyApi spotifyApi;
+    private final SpotifyApi spotifyApi;
 
     @Autowired
     public ImportacaoDiscosRepositoryAdapter(SpotifyApi spotifyApi) {

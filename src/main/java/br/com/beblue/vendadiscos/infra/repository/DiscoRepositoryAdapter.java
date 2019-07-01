@@ -23,7 +23,7 @@ import java.util.Optional;
 @Repository
 public class DiscoRepositoryAdapter implements DiscoRepositoryPort {
 
-    private DiscoRepository discoRepository;
+    private final DiscoRepository discoRepository;
 
     @Autowired
     public DiscoRepositoryAdapter(DiscoRepository discoRepository) {

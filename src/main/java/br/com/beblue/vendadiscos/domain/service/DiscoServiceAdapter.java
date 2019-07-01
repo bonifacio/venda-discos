@@ -18,7 +18,7 @@ import java.util.Optional;
 @Service
 public class DiscoServiceAdapter implements DiscoServicePort {
 
-    private DiscoRepositoryPort discoRepository;
+    private final DiscoRepositoryPort discoRepository;
 
     @Autowired
     public DiscoServiceAdapter(DiscoRepositoryPort discoRepository) {
@@ -42,9 +42,6 @@ public class DiscoServiceAdapter implements DiscoServicePort {
     public DiscoDTO obterPorId(Long id) {
 
         Optional<Disco> disco = discoRepository.obterPorId(id);
-        if (!disco.isPresent()) {
-            return null;
-        }
-        return DiscoConverter.paraDTO(disco.get());
+        return disco.map(DiscoConverter::paraDTO).orElse(null);
     }
 }

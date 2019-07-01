@@ -7,6 +7,7 @@ import java.math.BigDecimal;
 import java.time.DayOfWeek;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 public class MockFactory {
@@ -66,7 +67,7 @@ public class MockFactory {
         Disco disco = new Disco();
         disco.setPreco(new BigDecimal(100));
         item.setDisco(disco);
-        venda.setItens(Arrays.asList(item));
+        venda.setItens(Collections.singletonList(item));
         return venda;
     }
 
