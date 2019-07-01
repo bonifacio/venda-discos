@@ -6,12 +6,14 @@ import java.util.Collections;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import br.com.beblue.vendadiscos.domain.model.Venda;
 import br.com.beblue.vendadiscos.domain.model.dto.converter.ItemConverter;
 import io.swagger.annotations.ApiModel;
 
 @ApiModel("Venda")
+@JsonIgnoreProperties(value = { "total", "totalCashback" }, allowGetters = true)
 public class VendaDTO {
 
 	private Long id;
@@ -45,7 +47,7 @@ public class VendaDTO {
 		return itens.stream().map(ItemDTO::getValor).reduce(BigDecimal.ZERO, BigDecimal::add);
 	}
 	
-	public BigDecimal getTotalCashback() {
-		return itens.stream().map(ItemDTO::getCashback).reduce(BigDecimal.ZERO, BigDecimal::add);
+	public double getTotalCashback() {
+		return itens.stream().map(ItemDTO::getCashback).mapToDouble(BigDecimal::doubleValue).average().getAsDouble();
 	}
 }
