@@ -1,48 +1,57 @@
 package br.com.beblue.vendadiscos.domain.model.dto;
 
-import java.math.BigDecimal;
-import java.util.Set;
-import java.util.stream.Collectors;
-
 import br.com.beblue.vendadiscos.domain.model.Artista;
 import br.com.beblue.vendadiscos.domain.model.Disco;
 import br.com.beblue.vendadiscos.domain.model.Genero;
 import io.swagger.annotations.ApiModel;
 
+import java.math.BigDecimal;
+import java.util.Set;
+import java.util.stream.Collectors;
+
 @ApiModel("Disco")
 public class DiscoDTO {
 
-	private Long id;
-	private String nome;
-	private Set<String> artistas;
-	private Set<String> genero;
-	private BigDecimal preco;
+    private Long id;
+    private String nome;
+    private Set<String> artistas;
+    private Set<String> generos;
+    private BigDecimal preco;
+    private BigDecimal cashback;
 
-	public DiscoDTO(Disco disco) {
-		id = disco.getId();
-		nome = disco.getNome();
-		artistas = disco.getArtistas().stream().map(Artista::getNome).collect(Collectors.toSet());
-		genero = disco.getArtistas().stream().map(Artista::getGeneros).flatMap(Set::stream).map(Genero::getNome).collect(Collectors.toSet());
-		preco = disco.getPreco();
-	}
+    public DiscoDTO() {
+    }
 
-	public Long getId() {
-		return id;
-	}
+    public DiscoDTO(Disco disco) {
+        id = disco.getId();
+        nome = disco.getNome();
+        artistas = disco.getArtistas().stream().map(Artista::getNome).collect(Collectors.toSet());
+        generos = disco.getArtistas().stream().map(Artista::getGeneros).flatMap(Set::stream).map(Genero::getNome).collect(Collectors.toSet());
+        preco = disco.getPreco();
+        cashback = disco.getCashback();
+    }
 
-	public String getNome() {
-		return nome;
-	}
+    public Long getId() {
+        return id;
+    }
 
-	public Set<String> getArtistas() {
-		return artistas;
-	}
+    public String getNome() {
+        return nome;
+    }
 
-	public Set<String> getGenero() {
-		return genero;
-	}
+    public Set<String> getArtistas() {
+        return artistas;
+    }
 
-	public BigDecimal getPreco() {
-		return preco;
-	}
+    public Set<String> getGeneros() {
+        return generos;
+    }
+
+    public BigDecimal getCashback() {
+        return cashback;
+    }
+
+    public BigDecimal getPreco() {
+        return preco;
+    }
 }

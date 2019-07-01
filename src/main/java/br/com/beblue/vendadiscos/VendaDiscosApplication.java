@@ -14,32 +14,32 @@ import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 @EnableAsync
 public class VendaDiscosApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(VendaDiscosApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(VendaDiscosApplication.class, args);
+    }
 
-	@Bean
-	public TaskExecutor taskExecutor() {
-		ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
-		executor.setCorePoolSize(4);
-		executor.setMaxPoolSize(4);
-		executor.setQueueCapacity(100);
-		executor.initialize();
-		return executor;
-	}
+    @Bean
+    public TaskExecutor taskExecutor() {
+        ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
+        executor.setCorePoolSize(4);
+        executor.setMaxPoolSize(4);
+        executor.setQueueCapacity(100);
+        executor.initialize();
+        return executor;
+    }
 
-	@Bean
-	public MessageSource messageResource() {
-		ResourceBundleMessageSource messageBundleResrc=new ResourceBundleMessageSource();
-		messageBundleResrc.setBasename("classpath:messages");
-		messageBundleResrc.setDefaultEncoding("UTF-8");
-		return messageBundleResrc;
-	}
+    @Bean
+    public MessageSource messageResource() {
+        ResourceBundleMessageSource messageBundleResrc = new ResourceBundleMessageSource();
+        messageBundleResrc.setBasename("classpath:messages");
+        messageBundleResrc.setDefaultEncoding("UTF-8");
+        return messageBundleResrc;
+    }
 
-	@Bean
-	public LocalValidatorFactoryBean getValidator() {
-		LocalValidatorFactoryBean bean = new LocalValidatorFactoryBean();
-		bean.setValidationMessageSource(messageResource());
-		return bean;
-	}
+    @Bean
+    public LocalValidatorFactoryBean getValidator() {
+        LocalValidatorFactoryBean bean = new LocalValidatorFactoryBean();
+        bean.setValidationMessageSource(messageResource());
+        return bean;
+    }
 }

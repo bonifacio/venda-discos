@@ -4,9 +4,9 @@ import br.com.beblue.vendadiscos.domain.model.Artista;
 
 public interface ArtistaRepositoryPort {
 
-	Artista obterPorIdSpotify(String idSpotify);
+    Artista obterPorIdSpotify(String idSpotify);
 
-	Artista salvar(Artista artista);
+    Artista salvar(Artista artista);
 
-	void remover(Artista artista);
+    void remover(Artista artista);
 }

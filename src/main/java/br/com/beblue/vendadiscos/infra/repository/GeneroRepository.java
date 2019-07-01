@@ -1,9 +1,8 @@
 package br.com.beblue.vendadiscos.infra.repository;
 
+import br.com.beblue.vendadiscos.domain.model.Genero;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import br.com.beblue.vendadiscos.domain.model.Genero;
-
-public interface GeneroRepository extends JpaRepository<Genero, Long>{
+public interface GeneroRepository extends JpaRepository<Genero, Long> {
 
 }

@@ -1,13 +1,12 @@
 package br.com.beblue.vendadiscos.infra.repository;
 
-import java.util.Optional;
-
+import br.com.beblue.vendadiscos.domain.model.Disco;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.querydsl.QuerydslPredicateExecutor;
 
-import br.com.beblue.vendadiscos.domain.model.Disco;
+import java.util.Optional;
 
-public interface DiscoRepository extends JpaRepository<Disco, Long>, QuerydslPredicateExecutor<Disco>{
+public interface DiscoRepository extends JpaRepository<Disco, Long>, QuerydslPredicateExecutor<Disco> {
 
-	Optional<Disco> findOneByIdSpotify(String idSpotify);
+    Optional<Disco> findOneByIdSpotify(String idSpotify);
 }
